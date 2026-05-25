@@ -1,0 +1,314 @@
+{
+  "id": "park_act1",
+  "screens": [
+    {
+      "id": "screen_1",
+      "layers": [
+        {
+          "src": "assets/scenes/cave/act1/bg.png",
+          "placeholder": "#7ab648"
+        }
+      ],
+      "walkarea": {
+        "points": [
+          {
+            "x": 250,
+            "y": 600
+          },
+          {
+            "x": 550,
+            "y": 600
+          },
+          {
+            "x": 650,
+            "y": 400
+          },
+          {
+            "x": 150,
+            "y": 400
+          }
+        ]
+      },
+      "depthscale": {
+        "yNear": 580,
+        "yFar": 395,
+        "scaleNear": 1.5,
+        "scaleFar": 1.5
+      },
+      "characterScale": 2.0,
+      "playerStart": {
+        "x": 599,
+        "y": 479
+      },
+      "objects": [
+        {
+          "id": "ausgang",
+          "x": 340,
+          "y": 10,
+          "w": 100,
+          "h": 60,
+          "label": "Ausgang zum Park",
+<<<<<<< HEAD
+          "glow": {
+            "frames": [ "assets/scenes/cave/act1/exit.png" ],
+            "fps": 2                       
+          },
+=======
+          "glow": null,
+>>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
+          "condition": null,
+          "actions": {
+            "look": "Das ist ein Erdloch.",
+            "take": null,
+            "use": {
+              "goToScene": "park_act1",
+              "arriveAt": {
+                "x": 306,
+                "y": 531
+              }
+            }
+          }
+        },
+        {
+          "id": "amina_obj",
+          "type": "npc",
+          "x": 250,
+          "y": 440,
+<<<<<<< HEAD
+          "walkTo": { "x": 489, "y": 445 },
+          "visual": {
+            "src": "assets/npc/amina_sprite.png",
+            "scale": 0.3,
+            "frameW": 1024,
+            "frameH": 1024,
+=======
+          "visual": {
+            "src": "assets/npc/amina_sprite.png",
+            "scale": 1.3,
+            "frameW": 256,
+            "frameH": 256,
+>>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
+            "states": {
+              "idle": {
+                "row": 0,
+                "startFrame": 0,
+                "frames": 1,
+                "fps": 1
+              },
+              "blink": {
+                "row": 0,
+                "startFrame": 1,
+                "frames": 1,
+                "fps": 1
+              },
+              "smile": {
+                "row": 0,
+                "startFrame": 2,
+                "frames": 1,
+                "fps": 1
+              },
+              "look_right": {
+                "row": 0,
+                "startFrame": 3,
+                "frames": 1,
+                "fps": 1
+              }
+            },
+            "anchor": "bottom",
+            "pivotX": 0.5,
+            "pivotY": 1.0,
+            "offsetX": 0,
+            "offsetY": 20,
+            "behavior": {
+              "idleState": "idle",
+              "tickMs": 1500,
+              "reactions": [
+                {
+                  "state": "idle",
+                  "weight": 70
+                },
+                {
+                  "state": "blink",
+                  "weight": 15,
+                  "durationMs": 200
+                },
+                {
+                  "state": "look_right",
+                  "weight": 15,
+                  "durationMs": 1000
+                }
+              ]
+            }
+          },
+          "hotspot": {
+            "w": 70,
+            "h": 270
+          },
+          "label": "Amina"
+        }
+      ]
+    }
+  ],
+  "items": {},
+  "npcs": {
+    "amina": {
+      "name": "Amina",
+<<<<<<< HEAD
+      "portrait": "assets/npc/amina_portrait.png",
+=======
+>>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
+      "entry": [
+        {
+          "condition": {
+            "itemInInventory": "wolkenharpune"
+          },
+          "node": "hat_schon_getauscht"
+        },
+        {
+          "condition": {
+            "itemInInventory": "kissen"
+          },
+          "node": "hat_kissen"
+        },
+        {
+          "node": "start"
+        }
+      ],
+      "giveEntries": {
+        "kissen": "tausch",
+        "*": "falsch_item"
+      },
+      "dialog": {
+        "start": {
+<<<<<<< HEAD
+          "text": "Psst... nicht so laut. Die Kaninchen mögen keine Fremden. Vor allem nicht, wenn sie laut sind!",
+=======
+          "text": "Psst... nicht so laut. Die Kaninchen mögen keine Fremden.",
+>>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
+          "choices": [
+            {
+              "text": "Wer bist du?",
+              "next": "vorstellung"
+            },
+            {
+              "text": "Warum lebst du hier unten?",
+              "next": "story"
+            },
+            {
+<<<<<<< HEAD
+              "text": "Okay... ich geh' wieder.",
+=======
+              "text": "Okay... ich geh wieder.",
+>>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
+              "next": null
+            }
+          ]
+        },
+        "vorstellung": {
+<<<<<<< HEAD
+          "text": "Ich bin Amina. Früher... naja, ich hatte große Pläne! Aber jetzt lebe ich hier bei den Kaninchen. Sie nennen mich Muck-Muck. Ich habe noch nicht herausgefunden, wofür das steht.",
+          "next": "story"
+        },
+        "story": {
+          "text": "Ich wollte eine Wolke fangen. Einfach so, aus dem Himmel reißen! Ganz für mich allein! Ich hatte sogar eine Harpune gebaut.\n\nSie hat nicht funktioniert.\nAlle haben gelacht.\n\nAlso bin ich hier runter. Die Kaninchen stellen keine Fragen.",
+          "choices": [
+            {
+              "text": "Warum wolltest du eine Wolke fangen?",
+              "next": "wolke"
+            },
+            {
+=======
+          "text": "Ich bin Amina. Früher... naja, ich hatte größere Pläne.",
+          "next": "story"
+        },
+        "story": {
+          "text": "Ich wollte eine Wolke fangen. Einfach so, aus dem Himmel reißen.\nIch hatte sogar eine Harpune gebaut.\n\nHat nicht funktioniert.\nAlle haben gelacht.\n\nAlso bin ich hier runter. Die Kaninchen stellen keine Fragen.",
+          "choices": [
+            {
+>>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
+              "text": "Du lebst jetzt echt bei Kaninchen?",
+              "next": "kaninchen"
+            },
+            {
+              "text": "Und die Harpune?",
+              "next": "harpune"
+            },
+            {
+              "text": "Okay… viel Glück noch.",
+              "next": null
+            }
+          ]
+        },
+<<<<<<< HEAD
+        "wolke": {
+          "text": "Du bist schon mal kein Kaninchen. Du stellst Fragen.\n\nUm ehrlich zu sein: Ich dachte, wenn ich eine hätte... wäre endlich mal irgendwas anders.\nAlle schauen immer nach oben, aber die Leute, die unten sind, die sieht immer keiner.\nIch wollte, dass man sich an mich erinnert.",
+          "next": "wolke1"
+        },
+        "wolke1": {
+          "text": "Immerhin... eins habe ich erreicht. Die Leute erinnern sich an mich. Nur nicht so, wie ich wollte.",
+          "next": "wunsch1"
+        },
+        "kaninchen": {
+          "text": "Die sind erstaunlich organisiert. Sie verstecken alles.\n- Futter. Glitzerzeug. Gefühle.\nAber ihre Höhlen sind hart wie Stein.\n\nIch hab seit Tagen nicht richtig geschlafen...",
+          "next": "wunsch1"
+        },
+        "harpune": {
+          "text": "Die habe ich hier bei mir. Sie funktioniert theoretisch.\nPraktisch… na ja. Ich kann damit nicht umgehen. Es fiel mir schwer, alles zu koordinieren.\nHier unten brauche ich sie nicht mehr. Aber zum Wegschmeißen ist sie zu schade.",
+          "next": "wunsch1"
+        },
+        "wunsch": {
+          "text": "Wenn ich nur ein Kissen hätte...\nDann wäre das hier unten fast gemütlich.",
+          "next": "start"
+        },
+        "wunsch1": {
+          "text": "Wenn ich nur ein Kissen hätte...\nDann wäre das hier unten fast gemütlich.",
+          "next": "story"
+        },
+        "tausch": {
+          "text": "Ein Kissen...\nDas ist perfekt.\n\nHier. Nimm die Wolkenharpune.\nVielleicht klappt es ja bei dir besser als bei mir. \n\nOder du merkst rechtzeitig, dass Wolken nichts festhalten.",
+=======
+        "kaninchen": {
+          "text": "Die sind erstaunlich organisiert.\nAber ihre Höhlen sind hart wie Stein.\n\nIch hab seit Tagen nicht richtig geschlafen...",
+          "next": "wunsch"
+        },
+        "harpune": {
+          "text": "Die funktioniert theoretisch.\nPraktisch… naja.\nIch brauch sie hier unten eh nicht mehr.",
+          "next": "wunsch"
+        },
+        "wunsch": {
+          "text": "Wenn ich nur ein Kissen hätte...\nDann wäre das hier unten fast gemütlich.",
+          "next": null
+        },
+        "tausch": {
+          "text": "Ein Kissen...\nDas ist perfekt.\n\nHier. Nimm die Wolkenharpune.\nVielleicht klappt es ja bei dir besser als bei mir.",
+>>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
+          "trade": {
+            "give": "kissen",
+            "receive": "wolkenharpune"
+          },
+          "next": "nach_tausch"
+        },
+        "nach_tausch": {
+          "text": "Jetzt ist es hier unten endlich weich.\n\nUnd du? Versuch nicht zu hoch zu zielen.",
+          "next": null
+        },
+        "hat_kissen": {
+          "text": "Du hast da ein Kissen...\nWillst du tauschen?",
+          "next": null
+        },
+        "hat_schon_getauscht": {
+          "text": "Die Harpune hast du ja schon.\n\nPass auf, dass du nicht auch unten landest wie ich.",
+<<<<<<< HEAD
+          "next": "start"
+=======
+          "next": null
+>>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
+        },
+        "falsch_item": {
+          "text": "Das hilft mir hier unten nicht wirklich.",
+          "next": null
+        }
+      }
+    }
+  }
+}

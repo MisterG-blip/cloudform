@@ -1,0 +1,78 @@
+{
+  "id": "roof_act1",
+  "screens": [{
+    "id": "screen_1",
+    "layers": [
+      { "src": "assets/scenes/roof/act2/bg.png", "placeholder": "#c8dff0" }      
+    ],
+    "walkarea": {
+        "points": [
+          { "x": 534, "y": 460 },        
+          { "x": 800, "y": 340 },
+          { "x": 800, "y": 320 },
+          { "x": 400, "y": 250 },
+          { "x": 203, "y": 264 },
+          { "x": 203, "y": 310 }       
+        ]
+    },
+    "depthscale": {
+        "yNear": 560,
+        "yFar": 340,
+        "scaleNear": 1.5,
+        "scaleFar": 1.3
+    },
+    "playerStart": {
+        "x": 280,
+        "y": 342
+    },
+    "objects": [
+      {
+        "id": "abstieg",
+        "x": 170, "y": 342, "w": 100, "h": 120,
+        "label": "Leiter (runter)",
+        "glow": null,
+        "condition": null,
+        "actions": {
+          "look": "Die Leiter zurück zur Straße.",
+          "take": null,
+          "use": { "goToScene": "street_act2", "arriveAt": { "x": 755, "y": 430 } 
+          }
+        }
+      },
+      {
+        "id": "wolken",
+        "x": 150, "y": 10, "w": 600, "h": 120,
+        "label": "Wolken",
+        "glow": null,
+        "condition": null,
+        "actions": {
+          "look": "Der Himmel sieht so dunkel aus. Fast so als würde er böse sein.",
+          "take": "Viel zu weit weg! Man kann sie einsaugen!",
+          "use":  "Ich kann sie so nicht erreichen. Dafür habe ich die Pumpe."
+        }
+      },
+      {
+        "id": "vakuumpumpe_placed",
+        "src": "assets/items/vakuumpumpe_placed1.png",
+        "x": 584, "y": 221, "w": 150, "h": 150,
+        "label": "Vakuumpumpe",
+        "glow": null,
+        "actions": {
+          "look": "Es hat funktioniert. Ich habe Wolken eingefangen!",
+          "take": "Sie ist fest verankert. Die bleibt hier.",
+          "use":  "Ohne Energie geht hier nichts. Wind Energie haben wir nicht.",
+          "useWith": {
+            "phlogiston": {
+              "dialog": "Das Phlogiston startet die Pumpe! Los schnell an die Wolkenharpune...",
+              "startPuzzle": {
+                "type": "cloud_shoot",
+                "goal": 10
+              }
+            }
+          }
+        }
+      }
+    ]
+  }],
+  "items": {}
+}

@@ -1,0 +1,397 @@
+{
+  "id": "side_alley_act1",
+  "screens": [
+    {
+      "id": "screen_1",
+      "layers": [
+        {
+          "src": "assets/scenes/side_alley/act1/bg.png",
+          "placeholder": "#4a5a6a"
+        }
+      ],
+      "walkarea": {
+        "points": [
+          { "x": 100, "y": 600 },        
+          { "x": 700, "y": 600 },
+          { "x": 430, "y": 320 },
+          { "x": 361, "y": 320 }
+        ]
+      },
+      "depthscale": {
+        "yNear": 560,
+        "yFar": 340,
+        "scaleNear": 2.8,
+<<<<<<< HEAD
+        "scaleFar": 0.7
+=======
+        "scaleFar": 0.4
+>>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
+      },
+      "playerStart": {
+        "x": 400,
+        "y": 480
+      },
+      "objects": [
+        {
+<<<<<<< HEAD
+          "id": "scientist_obj",
+          "type": "npc",
+          "x": 200,
+          "y": 460,
+          "walkTo": { "x": 282, "y": 457 },
+          "visual": {
+            "src": "assets/npc/scientist_sprite.png",
+            "scale": 0.23,
+            "frameW": 1024,
+            "frameH": 1024,
+            "states": {
+              "idle": {
+                "row": 0,
+                "startFrame": 0,
+                "frames": 1,
+                "fps": 1
+              },
+              "blink": {
+                "row": 0,
+                "startFrame": 1,
+                "frames": 1,
+                "fps": 1
+              },
+              "smile": {
+                "row": 0,
+                "startFrame": 2,
+                "frames": 1,
+                "fps": 1
+              },
+              "look_right": {
+                "row": 0,
+                "startFrame": 3,
+                "frames": 1,
+                "fps": 1
+              }
+            },
+            "anchor": "bottom",
+            "pivotX": 0.5,
+            "pivotY": 1.0,
+            "offsetX": 0,
+            "offsetY": 10,
+            "behavior": {
+              "idleState": "idle",
+              "tickMs": 1500,
+              "reactions": [
+                {
+                  "state": "idle",
+                  "weight": 70
+                },
+                {
+                  "state": "blink",
+                  "weight": 15,
+                  "durationMs": 200
+                },
+                {
+                  "state": "look_right",
+                  "weight": 15,
+                  "durationMs": 1000
+                }
+              ]
+            }
+          },
+          "hotspot": {
+            "w": 70,
+            "h": 210
+          },
+          "label": "Dr. Schnurz"
+        },
+        {
+=======
+          "id": "door",
+          "src": null,
+          "x": 100,
+          "y": 65,
+          "w": 52,
+          "h": 400,
+          "label": "Tür",
+          "glow":null,          
+          "condition": null,
+          "actions": {
+            "look": "Hier geht es in die Wohnung des Wissenschaftlers.",
+            "take": null,
+            "use": { 
+              "goToScene": "entryway_act1",
+              "arriveAt": { "x": 106, "y": 520 }
+            }
+          }
+        },
+        {
+          "id": "scientist_obj",
+          "src": "assets/objects/scientist.png",
+          "x": 200,
+          "y": 280,
+          "w": 80,
+          "h": 130,
+          "label": "Wissenschaftler",
+          "walkTo": {"x" : "554", "y" : "431"},
+          "actions": {
+            "look": "Ein Mann mit Kittel Was der wohl macht?",
+            "take": null,
+            "use":  { "npc": "scientist" }
+        }
+      } ,
+        {
+>>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
+          "id": "muelleimer",
+          "x": 265,
+          "y": 325,
+          "w": 60,
+          "h": 60,
+          "label": "Mülleimer",
+<<<<<<< HEAD
+          "glow": {
+            "frames": [ "assets/scenes/side_alley/act1/muelleimer_glow.png" ],
+            "fps": 2,
+            "x": 0,
+            "y": 0            
+          },
+=======
+          "glow": null,
+>>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
+          "condition": { "itemNotConsumed": "aetherkolben"
+          },
+          "actions": {
+            "look": "Mülltonnen. Riecht nicht besonders einladend.\nIrgendwas schimmert da drin. Ich komme aber nicht an.",
+            "take": "Wie soll ich das machen?",
+            "use": "Ich habe gerde nichts. Aber Müll gehört in die Tonne!",
+            "useWith": {
+              "phlogiston_zange": {
+                "giveItem": "aetherkolben"
+              }
+            }
+          }
+        },        
+        {
+          "id": "vakuumpumpe",
+          "src": "assets/items/vakuumpumpe.png",
+          "x": 480,
+          "y": 350,
+          "w": 100,
+          "h": 100,
+          "label": "Vakuumpumpe",
+          "glow": null,
+          "condition": {"itemNotConsumed": "vakuumpumpe"},
+          "actions": {
+            "look": "Eine Pumpe! Die kann bestimmt Sachen einsaugen!",
+            "take": "vakuumpumpe",
+            "use": "Da fehlen ein paar Teile. Das kann ich erledigen!"
+          }
+        },
+        {
+          "id": "tor zur straße",          
+          "x": 350,
+          "y": 500,
+          "w": 100,
+          "h": 30,
+          "label": "Tor zur Straße",
+<<<<<<< HEAD
+          "glow": {
+            "frames": [ "assets/scenes/side_alley/act1/exit.png" ],
+            "fps": 2,
+            "x": 350,
+            "y": 463            
+          },
+=======
+          "glow": null,
+>>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
+          "condition": null,
+          "actions": {
+            "look": "Eine Pumpe! Die kann bestimmt Sachen einsaugen!",
+            "take": "vakuumpumpe",
+            "use": { "goToScene": "street_act1", "arriveAt": { "x": 250, "y": 380 } }
+          }
+        }
+      ]
+    }
+<<<<<<< HEAD
+  ],
+  "npcs": {
+    "scientist": {
+      "name": "Dr. Timothy Schnurz",
+      "portrait": "assets/npc/scientist_portrait.png",
+      "entry": [
+        {
+          "node": "start"
+        }
+      ],
+      "giveEntries": {
+        "kissen": "tausch",
+        "*": "falsch_item"
+      },
+      "dialog": {
+        "start": {
+          "text": "Guten Tag, wie kann ich dir helfen?",
+          "choices": [
+            {
+              "text": "Wer sind Sie?",
+              "next": "vorstellung"
+            },
+            {
+              "text": "Warum stehen Sie vor der Tür?",
+              "next": "story"
+            },
+            {
+              "text": "Okay... ich geh wieder.",
+              "next": null
+            }
+          ]
+        },
+        "start1": {
+          "text": "Hast du eine andere Frage?",
+          "choices": [
+            {
+              "text": "Wer sind Sie?",
+              "next": "vorstellung"
+            },
+            {
+              "text": "Warum stehen Sie vor der Tür?",
+              "next": "story"
+            },
+            {
+              "text": "Okay... ich geh wieder.",
+              "next": null
+            }
+          ]
+        },
+        "vorstellung": {
+          "text": "Ich bin Timothy Schnurz, Doktor der physikalisch-alchemistischen Chemie.",
+          "next": "maybel"
+        },
+        "maybel": {
+          "text": "Und mit wem habe ich es zu tun?",
+          "choices": [
+            {
+              "text": "Ich bin Maybel, einige nannten mich auch mal die mächtige Maybel!",
+              "next": "maybel1"
+            },
+            {
+              "text": "Das geht Sie nichts an!",
+              "next": "null"
+            }            
+          ]
+        },
+        "maybel1": {
+          "text": "Und wonach suchst du?",
+          "choices": [
+            {
+              "text": "Ich will eine Wolke haben! Ich habe mir eine gewünscht und jemand hat mir versprochen, dass ich sie auf diesem Wege bekomme.",
+              "next": "maybel2"
+            },
+            {
+              "text": "Das geht Sie nichts an!",
+              "next": "null"
+            }            
+          ]
+        },
+        "maybel2": {
+          "text": "Eine Wolke also...\nDas endet selten harmlos.\n\nSo einen Wunsch erfüllt man nicht mal eben.\nDa steckt meistens viel Arbeit dahinter.\n\nIch habe hier eine alte Pumpe abgestellt. Vielleicht hilft sie dir mehr als mir.\nAber es fehlen Teile.",
+          "next": "start1"
+        },        
+        "story": {
+          "text": "Unglücklicherweise befindet sich mein Schlüssel derzeit nicht mehr in meinem Besitz. Aber zum Glück weiß ich, wo der Schlüssel liegt: In meinem Labor auf der anderen Seite der Tür.",
+          "choices": [
+            {
+              "text": "Was machen Sie in Ihrem Labor?",
+              "next": "labor"
+            },
+            {
+              "text": "Wieso ist Ihr Labor hier so versteckt?",
+              "next": "labor1"
+            },
+            {
+              "text": "Okay… viel Glück noch.",
+              "next": null
+            }
+          ]
+        },
+        "story1": {
+          "text": "Hast du noch eine Frage?",
+          "choices": [
+            {
+              "text": "Was machen Sie in Ihrem Labor?",
+              "next": "labor"
+            },
+            {
+              "text": "Wieso ist Ihr Labor hier so versteckt?",
+              "next": "labor1"
+            },
+            {
+              "text": "Okay… viel Glück noch.",
+              "next": null
+            }
+          ]
+        },
+        "labor": {
+          "text": "Ich untersuche die physikalisch-alchemistische Chemie. Insbesondere interessieren mich die Zusammenhänge der Welt.\nWie entsteht Feuer?\nWoher kommt das Leben?\nWas ist die Seele der Materie?\nWas sind Wolken?",
+          "choices": [
+            {
+              "text": "Wie entsteht Feuer?",
+              "next": "feuer"
+            },
+            {
+              "text": "Wie entsteht Leben?",
+              "next": "leben"
+            },
+            {
+              "text": "Was soll die Seele der Materie sein?",
+              "next": "seele"
+            },
+            {
+              "text": "Was sind Wolken?",
+              "next": "wolke"
+            },
+            {
+              "text": "Aha, danke",
+              "next": "story1"
+            }            
+          ]          
+        },
+        "feuer": {
+          "text": "Für die Verbrennung eines Stoffes wird Phlogiston benötigt. Ich habe schon mehrfach versucht, es nachzuweisen. Äußerst trickreich!\nIch vermute, man findet es in sehr heißen Objekten.\nMehr habe ich noch nicht herausgefunden.\nMöglicherweise brauchst du einen bestimmten Greifapparat.",
+          "next": "labor"
+        },
+        "leben": {
+          "text": "Wie natürliches Leben entsteht, solltest du wissen. Du bist alt genug.\nWie künstliches Leben entsteht, darüber lässt sich bislang nur spekulieren. Letztens bekam ich eine Phiole, aber ich habe sie noch nicht untersucht.",
+          "next": "labor"
+        },
+        "seele": {
+          "text": "Sulphorium nennt man die Seele der Materie, weil es auf Gedanken, Wärme und Leben zu reagieren scheint – fast, als wäre es lebendig.",
+          "next": "labor"
+        },
+        "wolke": {
+          "text": "Die meisten Menschen glauben, Wolken bestünden bloß aus Wasser. Das halte ich für eine außergewöhnlich langweilige Erklärung. Allerdings fehlen mir bislang valide Daten.\nDer erste Fehler liegt bereits darin, dass die Menschen die Wolken immer nur von unten betrachten. Früher wurde auf diesem Gebiet deutlich mehr geforscht.",
+          "next": "labor"
+        },
+        "labor1": {
+          "text": "Offiziell wird meine Forschung nicht unterstützt. Meine Kollegen meinen, sie sei nicht mehr zeitgemäß.\nDaher habe ich mein Labor hier eingemietet. Ich gönne mir diesen Luxus.\nHast du eine Spende?",
+          "choices": [
+            {
+              "text": "Ich gucke, was ich finden kann.",
+              "giveItem": "prismabrille",
+              "next": "spende"
+              
+            },
+            {
+              "text": "Ich habe nichts zu verschenken.",
+              "next": "story1"
+            }            
+          ]    
+        },
+        "spende": {
+          "text": "Danke, immerhin hast du überlegt, wie du mir helfen könntest.",
+          "next": "story1"
+        }               
+      }
+    }
+  }
+=======
+  ]
+>>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
+}

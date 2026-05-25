@@ -1,0 +1,425 @@
+// ============================================================================
+// SCENE RENDERER – A Cloud for Maybel
+// Lädt Szenen-JSON, zeichnet Layer + Objects, verwaltet Screen-Wechsel.
+// Objects vereinen Hotspot + Dekoration + Glow in einem Eintrag.
+// ============================================================================
+
+class SceneRenderer {
+  constructor(canvas, ctx) {
+    this.canvas    = canvas;
+    this.ctx       = ctx;
+    this.sceneData = null;
+    this.currentIndex = 0;
+    this.images    = {};
+    this.glowTimer = 0;
+    this.glowFrame = 0;
+    this.transition = null;
+
+    // Hint-Button
+    this.hintActive  = false;  // läuft gerade eine Hint-Animation?
+    this.hintTimer   = 0;      // ms seit Start
+    this.hintAlpha   = 0;      // aktueller Glow-Alpha (0-1)
+  }
+
+  // -------------------------------------------------------------------------
+  // Laden
+  // -------------------------------------------------------------------------
+  async load(jsonPath) {
+    const res      = await fetch(jsonPath);
+    this.sceneData = await res.json();
+    this.currentIndex = 0;
+    this.glowTimer = 0;
+    this.glowFrame = 0;
+
+    const srcs = [];
+    for (const screen of this.sceneData.screens) {
+      for (const layer of screen.layers || []) {
+        if (layer.src) srcs.push(layer.src);
+      }
+      for (const obj of screen.objects || []) {
+        if (obj.src) srcs.push(obj.src);
+        if (obj.visual?.src) srcs.push(obj.visual.src);
+        for (const frame of obj.glow?.frames || []) srcs.push(frame);
+      }
+    }
+    await this._preloadImages(srcs);
+  }
+
+  _preloadImages(srcs) {
+    const unique = [...new Set(srcs)];
+    return Promise.all(unique.map(src => new Promise(resolve => {
+      if (this.images[src]) { resolve(); return; }
+      const img = new Image();
+      img.onload  = () => { this.images[src] = img; resolve(); };
+      img.onerror = () => { this.images[src] = null; resolve(); };
+      img.src = src;
+    })));
+  }
+
+  get currentScreen() {
+    return this.sceneData?.screens[this.currentIndex] || null;
+  }
+
+  // -------------------------------------------------------------------------
+  // Screen-Wechsel
+  // -------------------------------------------------------------------------
+  goToScreen(screenId) {
+    if (!this.sceneData) return;
+    const toIndex = this.sceneData.screens.findIndex(s => s.id === screenId);
+    if (toIndex < 0 || toIndex === this.currentIndex) return;
+    const direction = toIndex > this.currentIndex ? 'right' : 'left';
+    this.transition = { fromIndex: this.currentIndex, toIndex, direction, progress: 0 };
+  }
+
+  get isTransitioning() { return this.transition !== null; }
+
+  // -------------------------------------------------------------------------
+  // Update
+  // -------------------------------------------------------------------------
+  update(deltaTime) {
+    // Glow-Frames
+    const fps = 2;
+    this.glowTimer += deltaTime;
+    if (this.glowTimer >= 1000 / fps) {
+      this.glowTimer -= 1000 / fps;
+      this.glowFrame  = 1 - this.glowFrame;
+    }
+
+    // Hint-Animation: 1s fade in, 1s fade out
+    if (this.hintActive) {
+      this.hintTimer += deltaTime;
+      const total = 2000;
+      const t = this.hintTimer / total;
+      if (t < 0.5) {
+        this.hintAlpha = t * 2;           // 0 → 1
+      } else {
+        this.hintAlpha = (1 - t) * 2;     // 1 → 0
+      }
+      if (this.hintTimer >= total) {
+        this.hintActive = false;
+        this.hintTimer  = 0;
+        this.hintAlpha  = 0;
+      }
+    }
+
+    if (!this.transition) return;
+    this.transition.progress += 0.003 * deltaTime;
+    if (this.transition.progress >= 1) {
+      this.currentIndex = this.transition.toIndex;
+      this.transition   = null;
+    }
+  }
+
+  // Hint von außen auslösen (z.B. aus game.js)
+  triggerHint() {
+    console.log('💡 triggerHint aufgerufen, hintActive:', this.hintActive);
+    this.hintActive = true;
+    this.hintTimer  = 0;
+    this.hintAlpha  = 0;
+  }
+
+  // Hint-Button Koordinaten (für Hit-Detection in game.js)
+  hintButtonRect() {
+    return { x: CANVAS_WIDTH - 88, y: 8, w: 36, h: 36 };
+  }
+
+  // -------------------------------------------------------------------------
+  // Zeichnen
+  // -------------------------------------------------------------------------
+  draw(inventory, usedHotspots, consumedItems, deltaTime = 0) {
+    if (!this.sceneData) return;
+    if (this.transition) {
+      this._drawSlide(inventory, usedHotspots, consumedItems, deltaTime);
+    } else {
+      this._drawScreen(this.sceneData.screens[this.currentIndex], 0, inventory, usedHotspots, consumedItems, deltaTime);
+    }
+  }
+
+  _drawHintButton() {
+    const { x, y, w, h } = this.hintButtonRect();
+    const ctx = this.ctx;
+    ctx.save();
+
+    // Hintergrund
+    ctx.fillStyle   = this.hintActive ? 'rgba(255,220,80,0.3)' : 'rgba(0,0,0,0.4)';
+    ctx.strokeStyle = this.hintActive ? 'rgba(255,220,80,0.9)' : 'rgba(255,255,255,0.3)';
+    ctx.lineWidth   = 1.5;
+    ctx.beginPath();
+    ctx.roundRect(x, y, w, h, 8);
+    ctx.fill();
+    ctx.stroke();
+
+    // Glühbirnen-Icon
+    ctx.font      = '18px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = this.hintActive ? '#ffe080' : 'rgba(255,255,255,0.7)';
+    ctx.fillText('💡', x + w / 2, y + h / 2);
+
+    ctx.restore();
+  }
+
+  _drawScreen(screen, offsetX, inventory, usedHotspots, consumedItems, deltaTime) {
+    // 1. Hintergrund-Layer
+    for (const layer of screen.layers || []) {
+      const img = this.images[layer.src];
+      if (img) {
+        this.ctx.drawImage(img, offsetX, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+      } else if (layer.placeholder) {
+        this.ctx.fillStyle = layer.placeholder;
+        this.ctx.fillRect(offsetX, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        this.ctx.fillStyle = 'rgba(0,0,0,0.3)';
+        this.ctx.font = '13px monospace';
+        this.ctx.textAlign = 'left';
+        this.ctx.fillText(`[${layer.src}]`, offsetX + 12, 20);
+      }
+    }
+
+    // 2. Objects — condition prüfen, dann zeichnen
+    for (const obj of screen.objects || []) {
+      if (!this._checkCondition(obj.condition, inventory, usedHotspots, consumedItems)) continue;
+
+      // NPC-Object: visual-Block + Spritesheet-Support
+      if (obj.type === 'npc') {
+        this._drawNpc(obj, offsetX, inventory, usedHotspots, consumedItems, deltaTime);
+        continue;
+      }
+
+      // Normales Object
+      const x = offsetX + (obj.x || 0);
+      const y = obj.y || 0;
+      const w = obj.w || 256;
+      const h = obj.h || 256;
+
+      const notClickable = obj.clickable === false ||
+        (obj.clickable && !this._checkCondition(obj.clickable, inventory, usedHotspots, consumedItems));
+
+      // Bild zeichnen (nur wenn src vorhanden)
+      if (obj.src) {
+        const img = this.images[obj.src];
+        if (img) {
+          this.ctx.save();
+          this.ctx.globalAlpha = obj.alpha ?? 1;
+          if (obj.flipX) {
+            this.ctx.translate(x + w, y);
+            this.ctx.scale(-1, 1);
+            this.ctx.drawImage(img, 0, 0, w, h);
+          } else {
+            this.ctx.drawImage(img, x, y, w, h);
+          }
+          this.ctx.restore();
+        }
+      }
+
+      // Glow — auch für Objekte ohne src (z.B. Laterne im Hintergrundbild)
+      if (obj.glow?.frames && this.hintAlpha > 0) {
+        const glowSrc = obj.glow.frames[this.glowFrame];
+        const glowImg = this.images[glowSrc];
+        if (glowImg) {
+          const gx = offsetX + (obj.glow.x ?? obj.x ?? 0);
+          const gy = obj.glow.y ?? obj.y ?? 0;
+
+          // Skalierungsfaktor aus dem Hintergrundbild ableiten
+          const bgImg = this.images[screen.layers?.[0]?.src];
+          const scaleX = bgImg ? CANVAS_WIDTH  / bgImg.naturalWidth  : 1;
+          const scaleY = bgImg ? CANVAS_HEIGHT / bgImg.naturalHeight : 1;
+
+          const gw = obj.glow.w ?? (glowImg.naturalWidth  * scaleX);
+          const gh = obj.glow.h ?? (glowImg.naturalHeight * scaleY);
+
+          console.log(`Glow ${obj.id}: bg=${bgImg?.naturalWidth}x${bgImg?.naturalHeight} scale=${scaleX.toFixed(3)}x${scaleY.toFixed(3)} glowPNG=${glowImg.naturalWidth}x${glowImg.naturalHeight} → canvas=${Math.round(gw)}x${Math.round(gh)} at ${gx},${gy}`);
+
+          this.ctx.save();
+          this.ctx.globalAlpha = this.hintAlpha * (0.7 + Math.sin(Date.now() * 0.003) * 0.15);
+          this.ctx.drawImage(glowImg, gx, gy, gw, gh);
+          this.ctx.restore();
+        }
+      }
+    }
+  }
+
+  // NPC zeichnen — Spritesheet mit frame-Ausschnitt
+  _drawNpc(obj, offsetX, inventory, usedHotspots, consumedItems, deltaTime) {
+    const visual = obj.visual;
+    if (!visual?.src) return;
+
+    const img = this.images[visual.src];
+    if (!img || !img.complete || img.naturalWidth === 0) return;
+
+    // -----------------------------
+    // Animation Update (STATE LAYER)
+    // -----------------------------
+    this._updateNpcAnimation(obj, visual, deltaTime);
+
+    const scale = visual.scale ?? 1;
+
+    // Basis Frame-Größe
+    const frameW = visual.frameW ?? img.naturalWidth;
+    const frameH = visual.frameH ?? img.naturalHeight;
+
+    // -----------------------------
+    // STATE → ANIMATION
+    // -----------------------------
+    const state = visual.state || 'idle';
+    const config = visual.states?.[state];
+
+    const frameCount = config?.frames ?? 1;
+    const row = config?.row ?? 0;
+
+    const startFrame = config?.startFrame ?? 0;
+    const frameIndex = startFrame + ((obj._animFrame ?? 0) % frameCount);
+
+    const frameX = frameIndex * frameW;
+    const frameY = row * frameH;
+
+    // -----------------------------
+    // DRAW SIZE
+    // -----------------------------
+    const drawW = frameW * scale;
+    const drawH = frameH * scale;
+
+    // -----------------------------
+    // PIVOT SYSTEM
+    // -----------------------------
+    const pivotX = visual.pivotX ?? 0.5;
+    const pivotY = visual.pivotY ?? (visual.anchor === 'bottom' ? 1 : 0.5);
+
+    const offsetXv = visual.offsetX ?? 0;
+    const offsetYv = visual.offsetY ?? 0;
+
+    // Weltposition (Fußpunkt)
+    const baseX = offsetX + (obj.x || 0);
+    const baseY = obj.y || 0;
+
+    // -----------------------------
+    // FINAL POSITION
+    // -----------------------------
+    const x = baseX - drawW * pivotX + offsetXv;
+    const y = baseY - drawH * pivotY + offsetYv;
+
+    // -----------------------------
+    // RENDER
+    // -----------------------------
+    this.ctx.drawImage(
+      img,
+      frameX, frameY,
+      frameW, frameH,
+      x, y,
+      drawW, drawH
+    );
+  }
+
+  _updateNpcAnimation(obj, visual, deltaTime) {
+    // --- Behavior-Tick (zufaellige Zustandswechsel) ---
+    this._tickNpcBehavior(obj, visual, deltaTime);
+
+    const state = visual.state || 'idle';
+    const config = visual.states?.[state];
+    if (!config) return;
+
+    const fps = config.fps ?? 1;
+    const frameTime = 1000 / fps;
+
+    obj._animTimer = (obj._animTimer || 0) + deltaTime;
+
+    if (obj._animTimer >= frameTime) {
+      obj._animTimer -= frameTime;
+      obj._animFrame = ((obj._animFrame || 0) + 1) % (config.frames ?? 1);
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // NPC Behavior
+  // Gesteuert ueber visual.behavior in der JSON:
+  //
+  //  "behavior": {
+  //    "idleState": "idle",
+  //    "tickMs": 1500,
+  //    "reactions": [
+  //      { "state": "idle",       "weight": 70 },
+  //      { "state": "blink",      "weight": 15, "durationMs": 200 },
+  //      { "state": "look_right", "weight": 15, "durationMs": 1000 }
+  //    ]
+  //  }
+  // -------------------------------------------------------------------------
+  _tickNpcBehavior(obj, visual, deltaTime) {
+    const beh = visual.behavior;
+    if (!beh) return;
+
+    if (obj._behaviorTimer === undefined) {
+      obj._behaviorTimer = 0;
+      obj._behaviorLocked = false;
+      visual.state = beh.idleState ?? 'idle';
+    }
+
+    if (obj._behaviorLocked) {
+      obj._behaviorLockTimer = (obj._behaviorLockTimer || 0) + deltaTime;
+      if (obj._behaviorLockTimer >= obj._behaviorLockDuration) {
+        obj._behaviorLocked    = false;
+        obj._behaviorLockTimer = 0;
+        obj._animFrame         = 0;
+        visual.state           = beh.idleState ?? 'idle';
+      }
+      return;
+    }
+
+    obj._behaviorTimer += deltaTime;
+    const tickMs = beh.tickMs ?? 1500;
+    if (obj._behaviorTimer < tickMs) return;
+    obj._behaviorTimer = 0;
+
+    const reactions = beh.reactions;
+    if (!reactions?.length) return;
+
+    const totalWeight = reactions.reduce((s, r) => s + (r.weight ?? 1), 0);
+    let rand = Math.random() * totalWeight;
+    let chosen = reactions[reactions.length - 1];
+    for (const r of reactions) {
+      rand -= (r.weight ?? 1);
+      if (rand <= 0) { chosen = r; break; }
+    }
+
+    visual.state   = chosen.state;
+    obj._animFrame = 0;
+
+    if (chosen.durationMs) {
+      obj._behaviorLocked       = true;
+      obj._behaviorLockTimer    = 0;
+      obj._behaviorLockDuration = chosen.durationMs;
+    }
+  }
+
+  _drawSlide(inventory, usedHotspots, consumedItems, deltaTime = 0) {
+    const t   = this._easeInOut(this.transition.progress);
+    const dir = this.transition.direction;
+    const sign = dir === 'right' ? 1 : -1;
+    this._drawScreen(this.sceneData.screens[this.transition.fromIndex],
+      -sign * t * CANVAS_WIDTH, inventory, usedHotspots, consumedItems, deltaTime);
+    this._drawScreen(this.sceneData.screens[this.transition.toIndex],
+      sign * (1 - t) * CANVAS_WIDTH, inventory, usedHotspots, consumedItems, deltaTime);
+  }
+
+
+
+  _easeInOut(t) {
+    return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+  }
+
+  // Bedingung prüfen (gleiche Logik wie HotspotSystem)
+  _checkCondition(c, inventory, usedHotspots, consumedItems) {
+    if (!c || !inventory) return true;
+    if (c.allConditions)       return c.allConditions.every(sub => this._checkCondition(sub, inventory, usedHotspots, consumedItems));
+    if (c.itemNotInInventory)  return !inventory.has(c.itemNotInInventory);
+    if (c.itemInInventory)     return inventory.has(c.itemInInventory);
+    if (c.allItemsInInventory) return c.allItemsInInventory.every(id => inventory.has(id));
+    if (c.hotspotUsed)         return usedHotspots?.has(c.hotspotUsed) || false;
+    if (c.hotspotUsedWith) {
+      const actions = usedHotspots?.get(c.hotspotUsedWith.id);
+      return actions ? actions.has(c.hotspotUsedWith.action) : false;
+    }
+    if (c.eggNotSeen)       return !usedHotspots?.has(`__egg_seen_${c.eggNotSeen}`);
+    if (c.itemConsumed)    return consumedItems?.has(c.itemConsumed)    || false;
+    if (c.itemNotConsumed) return !consumedItems?.has(c.itemNotConsumed) ?? true;
+    return true;
+  }
+}
