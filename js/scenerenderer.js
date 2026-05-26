@@ -14,14 +14,11 @@ class SceneRenderer {
     this.glowTimer = 0;
     this.glowFrame = 0;
     this.transition = null;
-<<<<<<< HEAD
 
     // Hint-Button
     this.hintActive  = false;  // läuft gerade eine Hint-Animation?
     this.hintTimer   = 0;      // ms seit Start
     this.hintAlpha   = 0;      // aktueller Glow-Alpha (0-1)
-=======
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
   }
 
   // -------------------------------------------------------------------------
@@ -88,7 +85,6 @@ class SceneRenderer {
       this.glowFrame  = 1 - this.glowFrame;
     }
 
-<<<<<<< HEAD
     // Hint-Animation: 1s fade in, 1s fade out
     if (this.hintActive) {
       this.hintTimer += deltaTime;
@@ -106,8 +102,6 @@ class SceneRenderer {
       }
     }
 
-=======
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
     if (!this.transition) return;
     this.transition.progress += 0.003 * deltaTime;
     if (this.transition.progress >= 1) {
@@ -116,7 +110,6 @@ class SceneRenderer {
     }
   }
 
-<<<<<<< HEAD
   // Hint von außen auslösen (z.B. aus game.js)
   triggerHint() {
     this.hintActive = true;
@@ -129,8 +122,6 @@ class SceneRenderer {
     return { x: CANVAS_WIDTH - 88, y: 8, w: 36, h: 36 };
   }
 
-=======
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
   // -------------------------------------------------------------------------
   // Zeichnen
   // -------------------------------------------------------------------------
@@ -143,7 +134,6 @@ class SceneRenderer {
     }
   }
 
-<<<<<<< HEAD
   _drawHintButton() {
     const { x, y, w, h } = this.hintButtonRect();
     const ctx = this.ctx;
@@ -168,8 +158,6 @@ class SceneRenderer {
     ctx.restore();
   }
 
-=======
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
   _drawScreen(screen, offsetX, inventory, usedHotspots, consumedItems, deltaTime) {
     // 1. Hintergrund-Layer
     for (const layer of screen.layers || []) {
@@ -197,13 +185,6 @@ class SceneRenderer {
       }
 
       // Normales Object
-<<<<<<< HEAD
-=======
-      if (!obj.src) continue;
-      const img = this.images[obj.src];
-      if (!img) continue;      
-
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
       const x = offsetX + (obj.x || 0);
       const y = obj.y || 0;
       const w = obj.w || 256;
@@ -212,7 +193,6 @@ class SceneRenderer {
       const notClickable = obj.clickable === false ||
         (obj.clickable && !this._checkCondition(obj.clickable, inventory, usedHotspots, consumedItems));
 
-<<<<<<< HEAD
       // Bild zeichnen (nur wenn src vorhanden)
       if (obj.src) {
         const img = this.images[obj.src];
@@ -239,27 +219,6 @@ class SceneRenderer {
           this.ctx.save();
           this.ctx.globalAlpha = this.hintAlpha;
           this.ctx.drawImage(glowImg, offsetX, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-=======
-      this.ctx.save();
-      this.ctx.globalAlpha = notClickable ? (obj.alpha ?? 1) * 0.45 : (obj.alpha ?? 1);
-      if (obj.flipX) {
-        this.ctx.translate(x + w, y);
-        this.ctx.scale(-1, 1);
-        this.ctx.drawImage(img, 0, 0, w, h);
-      } else {
-        this.ctx.drawImage(img, x, y, w, h);
-      }
-      this.ctx.restore();
-
-      // Glow
-      if (!notClickable && obj.glow?.frames) {
-        const glowSrc = obj.glow.frames[this.glowFrame];
-        const glowImg = this.images[glowSrc];
-        if (glowImg) {
-          this.ctx.save();
-          this.ctx.globalAlpha = 0.7 + Math.sin(Date.now() * 0.003) * 0.15;
-          this.ctx.drawImage(glowImg, x, y, w, h);
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
           this.ctx.restore();
         }
       }

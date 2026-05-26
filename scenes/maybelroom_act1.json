@@ -1,9 +1,6 @@
 {
   "id": "maybelroom_act1",
-<<<<<<< HEAD
   "ambient": "assets/audio/ambient/maybel.mp3",
-=======
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
   "screens": [{
       "id": "screen_1",
       "layers": [
@@ -55,14 +52,10 @@
           "w": 220,
           "h": 30,
           "label": "Schreibtisch",
-<<<<<<< HEAD
           "glow": {
             "frames": [ "assets/scenes/maybelroom/act1/desk.png" ],
             "fps": 2                       
           },
-=======
-          "glow": null,
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
           "condition": null,
           "walkTo": { "x": 210, "y": 500 },
           "actions": {
@@ -81,14 +74,10 @@
           "w": 50,
           "h": 120,
           "label": "Schublade",
-<<<<<<< HEAD
           "glow": {
             "frames": [ "assets/scenes/maybelroom/act1/schubladen.png" ],
             "fps": 2                       
           },
-=======
-          "glow": null,
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
           "condition": {
             "hotspotUsedWith": { "id": "schreibtisch", "action": "look" }
           },
@@ -109,14 +98,10 @@
           "w": 250,
           "h": 160,
           "label": "Bett",
-<<<<<<< HEAD
           "glow": {
             "frames": [ "assets/scenes/maybelroom/act1/bett.png" ],
             "fps": 2                       
           },
-=======
-          "glow": null,
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
           "condition": {"hotspotNotUsed": { "id": "bett", "action": "take" }
           },
           "walkTo": { "x": 430, "y": 511 },
@@ -127,7 +112,6 @@
           }
         },
         {
-<<<<<<< HEAD
           "id": "tasche",
           "src": null,
           "x": 720,
@@ -148,8 +132,6 @@
           }
         },
         {
-=======
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
           "id": "kissen",
           "src": "assets/items/kissen.png",
           "x": 600,
@@ -165,11 +147,7 @@
           },
           "walkTo": { "x": 430, "y": 511 },
           "actions": {
-<<<<<<< HEAD
             "look": "Ja! Das ist ein Kissen!",
-=======
-            "look": "Ja! das ist ein Kissen!",
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
             "take": "kissen",
             "use":  "Es ist weich."
           }
@@ -181,14 +159,10 @@
           "w": 40,
           "h": 25,
           "label": "Radio",
-<<<<<<< HEAD
           "glow": {
             "frames": [ "assets/scenes/maybelroom/act1/radio.png" ],
             "fps": 2                       
           },
-=======
-          "glow": null,
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
           "condition": null,
           "walkTo": {
             "x": 250,
@@ -197,11 +171,7 @@
           "actions": {
             "look": "Ein altes Radio. Es spielt leise Musik.",
             "take": "Was soll ich mit einem Radio? Ich will doch eine Wolke!",
-<<<<<<< HEAD
             "use": { "openRadio": true }
-=======
-            "use": "Ich drehe kurz lauter. ... Okay reicht... Fokus, Maybel! Fokus!"
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
           }
         }
       ]

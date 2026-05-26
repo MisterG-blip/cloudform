@@ -20,14 +20,11 @@
     "description": "Ein alter Messingschlüssel.",
     "src": "assets/items/schluessel.png"
   },
-<<<<<<< HEAD
   "tagebuch": {
     "label": "Tagebuch",
     "description": "Mein Tagebuch. Es weiß viel über mich. Aber ich weiß genauso viel über es.\n\nEs kann mich nicht erpressen.",
     "src": "assets/items/tagebuch.png"
   },
-=======
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
   "schatulle": {
     "emoji": "📦", "label": "Schatulle",
     "description": "Eine alte Holzschatulle. Verschlossen.",

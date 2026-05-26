@@ -7,17 +7,11 @@
 const INVENTORY_MAX = 7;
 const SLOT_SIZE     = 54;
 const SLOT_GAP      = 10;
-<<<<<<< HEAD
 const UI_OFFSET_X = 100;
 const SLOT_START_X  = (CANVAS_WIDTH - (INVENTORY_MAX * (SLOT_SIZE + SLOT_GAP) - SLOT_GAP)) / 2 + UI_OFFSET_X;
 const SLOT_Y        = CANVAS_HEIGHT - 68;
 
 
-=======
-const SLOT_START_X  = (CANVAS_WIDTH - (INVENTORY_MAX * (SLOT_SIZE + SLOT_GAP) - SLOT_GAP)) / 2;
-const SLOT_Y        = CANVAS_HEIGHT - 68;
-
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
 class Inventory {
   constructor(itemDefs) {
     this.items       = [];     // [{ id, label, emoji, src, contains, canContain, combinesWith, ... }]

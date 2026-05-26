@@ -18,13 +18,8 @@
     "depthscale": {
         "yNear": 560,
         "yFar": 340,
-<<<<<<< HEAD
         "scaleNear": 3,
         "scaleFar":  1.1
-=======
-        "scaleNear": 1.5,
-        "scaleFar": 1.3
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
     },
     "playerStart": {
         "x": 280,
@@ -35,14 +30,10 @@
         "id": "abstieg",
         "x": 170, "y": 342, "w": 100, "h": 120,
         "label": "Leiter (runter)",
-<<<<<<< HEAD
         "glow": {
             "frames": [ "assets/scenes/roof/act1/abstieg.png" ],
             "fps": 2                       
           },
-=======
-        "glow": null,
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
         "condition": null,
         "actions": {
           "look": "Die Leiter zurück zur Straße.",
@@ -53,7 +44,6 @@
       },
       {
         "id": "wolken",
-<<<<<<< HEAD
         "x": 350, "y": 10, "w": 400, "h": 80,
         "label": "Wolken",
         "glow": {
@@ -70,32 +60,16 @@
               "text": "Zu flüchtig... So kann ich sie nicht festhalten."            
             }
           }
-=======
-        "x": 150, "y": 10, "w": 600, "h": 120,
-        "label": "Wolken",
-        "glow": null,
-        "condition": null,
-        "actions": {
-          "look": "So viele Wolken! Eine davon sieht besonders schön aus. Wie schön wäre es, sie zu besitzen...",
-          "take": "Viel zu weit weg! Vielleicht kann man sie einsaugen?",
-          "use":  "Ich kann sie so nicht erreichen. Ich brauche etwas dafür."
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
         }
       },
       {
         "id": "sonne",
-<<<<<<< HEAD
         "x": 100, "y": 10, "w": 100, "h": 80,
         "label": "Sonne",
         "glow": {
             "frames": [ "assets/scenes/roof/act1/sun.png" ],
             "fps": 2
           },
-=======
-        "x": 50, "y": 10, "w": 100, "h": 120,
-        "label": "Sonne",
-        "glow": null,
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
         "condition": null,
         "actions": {
           "look": "Man soll nicht in die Sonne gucken.",
@@ -113,14 +87,10 @@
         "id": "stellplatz",
         "x": 584, "y": 321, "w": 100, "h": 100,
         "label": "Stellplatz",
-<<<<<<< HEAD
         "glow": {
             "frames": [ "assets/scenes/roof/act1/spot.png" ],
             "fps": 2          
           },
-=======
-        "glow": null,
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
         "condition": {
           "allConditions": [
               { "machineComplete": "vakuumpumpe" },
@@ -155,12 +125,8 @@
               "dialog": "Das Phlogiston startet die Pumpe! Los schnell an die Wolkenharpune...",
               "startPuzzle": {
                 "type": "cloud_shoot",
-<<<<<<< HEAD
                 "goal": 10,
                 "goToScene": "roof_act2"
-=======
-                "goal": 10
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
               }
             }
           }

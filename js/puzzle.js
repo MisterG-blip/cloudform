@@ -2,10 +2,7 @@
 // PUZZLE SYSTEM – A Cloud for Maybel
 // Verwaltet Mini-Rätsel die über der Szene erscheinen.
 // Aktuell: combination_lock (4-stelliges Zahlenschloss)
-<<<<<<< HEAD
 // Spiel 2: CLOUD SHOOT MINIGAME
-=======
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
 // Erweiterbar: weitere Typen später hinzufügen
 // ============================================================================
 
@@ -48,12 +45,9 @@ class PuzzleSystem {
   }
 
   close() {
-<<<<<<< HEAD
     //habe ich erstmal auskommentiert, weil die sache mit was anderem kollidiert. siehe initCloudShoot
     //document.body.style.cursor = this._prevCursor;
 
-=======
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
     this.active = false;
     this.type   = null;
     this.config = null;
@@ -318,25 +312,18 @@ class PuzzleSystem {
 
 PuzzleSystem.prototype._initCloudShoot = function() {
   const s = this._state;
-<<<<<<< HEAD
 
   // Cursor ausblenden widerspircht sich aber mit canvas.style.cursor = 'none';
   //this._prevCursor = document.body.style.cursor;
   //document.body.style.cursor = 'none';
 
-=======
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
   s.phase      = 'playing';
   s.caught     = 0;
   s.goal       = this.config.goal || 10;
   s.clouds     = [];
   s.lensX      = CANVAS_WIDTH  / 2;   // Linsen-Mittelpunkt
   s.lensY      = CANVAS_HEIGHT / 2;
-<<<<<<< HEAD
   s.lensR      = 120;                  // Radius Zielfernrohr
-=======
-  s.lensR      = 160;                  // Radius Zielfernrohr
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
   s.holding    = false;                // Maustaste/Touch gehalten
   s.holdTarget = null;                 // Wolke die gerade eingesogen wird
   s.holdProgress = 0;                  // 0 → 1
@@ -458,7 +445,6 @@ PuzzleSystem.prototype._drawCloudShoot = function(ctx) {
 
   // ── Hintergrund: Nachthimmel ──────────────────────────────────────────────
   const sky = ctx.createLinearGradient(0, 0, 0, CANVAS_HEIGHT);
-<<<<<<< HEAD
   sky.addColorStop(0, '#8ec5ff');   // heller Himmel oben
   sky.addColorStop(0.6, '#cfe9ff'); // diffuse Luft
   sky.addColorStop(1, '#e8f4ff');   // fast weiß unten
@@ -466,25 +452,6 @@ PuzzleSystem.prototype._drawCloudShoot = function(ctx) {
   ctx.fillStyle = sky;
   ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-=======
-  sky.addColorStop(0, '#0a0e2a');
-  sky.addColorStop(1, '#1a2a4a');
-  ctx.fillStyle = sky;
-  ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-
-  // Sterne
-  ctx.fillStyle = 'rgba(255,255,255,0.5)';
-  // Deterministisch via seed
-  for (let i = 0; i < 60; i++) {
-    const sx = ((i * 137 + 42) % CANVAS_WIDTH);
-    const sy = ((i * 97  + 13) % (CANVAS_HEIGHT * 0.7));
-    const sr = 0.5 + (i % 3) * 0.5;
-    ctx.beginPath();
-    ctx.arc(sx, sy, sr, 0, Math.PI * 2);
-    ctx.fill();
-  }
-
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
   // ── Wolken hinter der Linse ───────────────────────────────────────────────
   for (const c of s.clouds) {
     if (c.suckAnim >= 1) continue;

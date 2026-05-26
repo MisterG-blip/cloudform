@@ -1,9 +1,6 @@
 {
   "id": "street_act1",
-<<<<<<< HEAD
   "ambient": "assets/audio/ambient/street.mp3",
-=======
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
   "screens": [
     {
       "id": "screen_1",
@@ -29,11 +26,7 @@
       "depthscale": {
         "yNear": 560,
         "yFar": 340,
-<<<<<<< HEAD
         "scaleNear": 2,
-=======
-        "scaleNear": 1.4,
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
         "scaleFar": 0.2
       },
       "playerStart": {
@@ -46,26 +39,15 @@
           "src": null,
           "x": 110,
           "y": 65,
-<<<<<<< HEAD
           "walkTo": { "x": 182, "y": 474 },
-=======
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
           "w": 52,
           "h": 412,
           "label": "Laterne",
           "glow": {
-<<<<<<< HEAD
             "frames": [ "assets/scenes/street/act1/laterne_glow.png" ],
             "fps": 2,
             "x": 86,
             "y": 54            
-=======
-            "frames": [
-              "assets/scenes/street/act1/laterne_normal.png",
-              "assets/scenes/street/act1/laterne_glow.png"
-            ],
-            "fps": 2
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
           },
           "condition": { "itemNotConsumed": "windessenz"
           },
@@ -82,14 +64,10 @@
           "w": 30,
           "h": 30,
           "label": "Mülleimer",
-<<<<<<< HEAD
           "glow": {
             "frames": [ "assets/scenes/street/act1/garbage_glow.png" ],
             "fps": 2            
           },
-=======
-          "glow": null,
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
           "condition": null,
           "actions": {
             "look": "Ein grüner Mülleimer. Riecht nicht besonders einladend.",
@@ -104,16 +82,12 @@
           "w": 30,
           "h": 55,
           "label": "Seitenstraße",
-<<<<<<< HEAD
           "glow": {
             "frames": [ "assets/scenes/street/act1/sideway_glow.png" ],
             "fps": 2,
             "x": 216,
             "y": 309            
           },
-=======
-          "glow": null,
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
           "condition": null,
           "actions": {
             "look": "Hier geht es zur Seitenstraße.",
@@ -130,14 +104,10 @@
           "w": 50,
           "h": 50,
           "label": "Bank",
-<<<<<<< HEAD
           "glow": {
             "frames": [ "assets/scenes/street/act1/bank_glow.png" ],
             "fps": 2            
           },
-=======
-          "glow": null,
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
           "condition": { "itemNotConsumed": "feder"
           },
           "actions": {
@@ -153,14 +123,10 @@
           "w": 40,
           "h": 80,
           "label": "Briefkasten",
-<<<<<<< HEAD
           "glow": {
             "frames": [ "assets/scenes/street/act1/brief_glow.png" ],
             "fps": 2            
           },
-=======
-          "glow": null,
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
           "condition": null,
           "actions": {
             "look": "Ein alter brauner Briefkasten. Leer.",
@@ -175,14 +141,10 @@
           "w": 40,
           "h": 100,
           "label": "Haustür",
-<<<<<<< HEAD
           "glow": {
             "frames": [ "assets/scenes/street/act1/door_glow.png" ],
             "fps": 2            
           },
-=======
-          "glow": null,
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
           "condition": null,
           "actions": {
             "look": "Die Haustür. Sie führt in mein Zimmer.",
@@ -199,14 +161,10 @@
           "w": 90,
           "h": 182,
           "label": "Feuertreppe",
-<<<<<<< HEAD
           "glow": {
             "frames": [ "assets/scenes/street/act1/roof_glow.png" ],
             "fps": 2          
           },
-=======
-          "glow": null,
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
           "condition": null,
           "actions": {
             "look": "Eine alte Feuertreppe. Sie führt aufs Dach. Von dort oben hat man bestimmt eine gute Sicht auf die Wolken.",
@@ -220,7 +178,6 @@
           "id": "gartentor",
           "x": 0,
           "y": 350,
-<<<<<<< HEAD
           "walkTo" : { "x": 30, "y": 550 },
           "w": 60,
           "h": 200,
@@ -229,12 +186,6 @@
             "frames": [ "assets/scenes/street/act1/glow_r.png" ],
             "fps": 2         
           },
-=======
-          "w": 60,
-          "h": 200,
-          "label": "Weg zum Park",
-          "glow": null,
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
           "condition": null,
           "actions": {
             "look": "Ein schmaler Weg der nach links führt. Irgendwo da drüben ist der Park.",

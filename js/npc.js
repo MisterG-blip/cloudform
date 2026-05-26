@@ -7,7 +7,6 @@
 class NpcSystem {
   constructor() {
     this.active   = false;
-<<<<<<< HEAD
     this.npc      = null;
     this.node     = null;
     this.choices  = [];
@@ -21,12 +20,6 @@ class NpcSystem {
     img.onload  = () => { this._portraits[src] = img; };
     img.onerror = () => { this._portraits[src] = null; };
     img.src = src;
-=======
-    this.npc      = null;    // aktueller NPC aus JSON
-    this.node     = null;    // aktueller Dialog-Knoten
-    this.choices  = [];      // aktuelle Auswahloptionen
-    this.onClose  = null;    // Callback wenn Dialog endet
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
   }
 
   // -------------------------------------------------------------------------
@@ -38,12 +31,7 @@ class NpcSystem {
     this.active  = true;
     this.npc     = npcDef;
     this.onClose = onClose;
-<<<<<<< HEAD
     this._loadPortrait(npcDef.portrait);
-=======
-
-    // Einstiegs-Knoten bestimmen (kann je nach Inventar variieren)
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
     const entryId = this._getEntryNode(npcDef, inventory);
     this._goToNode(entryId, inventory, itemDefs);
   }
@@ -102,11 +90,7 @@ class NpcSystem {
 
     this.node = { ...node, id: nodeId };
 
-<<<<<<< HEAD
     // Tausch auf Knoten-Ebene sofort ausführen
-=======
-    // Tausch auf Knoten-Ebene sofort ausführen (z.B. "tausch"-Knoten bei giveEntries)
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
     if (node.trade) {
       const { give, receive } = node.trade;
       if (give && inventory.has(give)) inventory.remove(give);
@@ -116,7 +100,6 @@ class NpcSystem {
       }
     }
 
-<<<<<<< HEAD
     // Item schenken ohne Tausch
     if (node.giveItem) {
       const itemDef = itemDefs[node.giveItem];
@@ -125,8 +108,6 @@ class NpcSystem {
       }
     }
 
-=======
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
     // Auswahloptionen filtern (Bedingungen prüfen)
     this.choices = (node.choices || []).filter(c =>
       !c.condition || this._checkCondition(c.condition, inventory)
@@ -149,11 +130,7 @@ class NpcSystem {
 
     // Auswahl geklickt?
     const layout = this._layout();
-<<<<<<< HEAD
     for (let i = 0; i < layout.choices.length; i++) {
-=======
-    for (let i = 0; i < this.choices.length; i++) {
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
       const btn = layout.choices[i];
       if (btn && x >= btn.x && x <= btn.x + btn.w &&
                  y >= btn.y && y <= btn.y + btn.h) {
@@ -212,7 +189,6 @@ class NpcSystem {
   // -------------------------------------------------------------------------
   // Zeichnen
   // -------------------------------------------------------------------------
-<<<<<<< HEAD
   // -------------------------------------------------------------------------
   // Word-Wrap
   // -------------------------------------------------------------------------
@@ -367,40 +343,10 @@ class NpcSystem {
     }
 
     // NPC-Text
-=======
-  draw(ctx) {
-    if (!this.active || !this.node) return;
-
-    const layout = this._layout();
-
-    ctx.save();
-
-    // Hintergrund-Box
-    ctx.fillStyle   = 'rgba(10,10,30,0.88)';
-    ctx.strokeStyle = 'rgba(255,255,255,0.2)';
-    ctx.lineWidth   = 1.5;
-    ctx.beginPath();
-    ctx.roundRect(layout.box.x, layout.box.y, layout.box.w, layout.box.h, 12);
-    ctx.fill();
-    ctx.stroke();
-
-    // NPC-Name
-    if (this.npc.name) {
-      ctx.font      = 'bold 14px sans-serif';
-      ctx.fillStyle = '#ffe080';
-      ctx.textAlign = 'left';
-      ctx.textBaseline = 'top';
-      ctx.fillText(this.npc.name, layout.box.x + 16, layout.box.y + 14);
-    }
-
-    // NPC-Text (mehrzeilig)
-    const lines = (this.node.text || '').split('\n');
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
     ctx.font      = '15px sans-serif';
     ctx.fillStyle = '#fff';
     ctx.textAlign = 'left';
     ctx.textBaseline = 'top';
-<<<<<<< HEAD
     textLines.forEach((line, i) => {
       ctx.fillText(line, textX, textY + i * lineH);
     });
@@ -410,21 +356,6 @@ class NpcSystem {
       for (const btn of choices) {
         ctx.fillStyle   = 'rgba(255,255,255,0.08)';
         ctx.strokeStyle = 'rgba(255,220,80,0.5)';
-=======
-    const textY = layout.box.y + (this.npc.name ? 36 : 16);
-    lines.forEach((line, i) => {
-      ctx.fillText(line, layout.box.x + 16, textY + i * 22);
-    });
-
-    // Auswahloptionen oder Weiter-Hinweis
-    if (this.choices.length > 0) {
-      for (let i = 0; i < this.choices.length; i++) {
-        const btn = layout.choices[i];
-        const c   = this.choices[i];
-
-        ctx.fillStyle   = 'rgba(255,255,255,0.1)';
-        ctx.strokeStyle = 'rgba(255,220,80,0.6)';
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
         ctx.lineWidth   = 1;
         ctx.beginPath();
         ctx.roundRect(btn.x, btn.y, btn.w, btn.h, 6);
@@ -434,56 +365,19 @@ class NpcSystem {
         ctx.font      = '13px sans-serif';
         ctx.fillStyle = '#ffe080';
         ctx.textAlign = 'left';
-<<<<<<< HEAD
         ctx.textBaseline = 'top';
         btn.lines.forEach((line, i) => {
           ctx.fillText(line, btn.x + 10, btn.y + 6 + i * 20);
         });
-=======
-        ctx.textBaseline = 'middle';
-        ctx.fillText(`▸ ${c.text}`, btn.x + 10, btn.y + btn.h / 2);
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
       }
     } else {
       ctx.font      = '11px sans-serif';
       ctx.fillStyle = 'rgba(255,255,255,0.4)';
       ctx.textAlign = 'right';
       ctx.textBaseline = 'alphabetic';
-<<<<<<< HEAD
       ctx.fillText('[ klicken ]', box.x + box.w - 12, box.y + box.h - 10);
-=======
-      ctx.fillText('[ klicken ]',
-        layout.box.x + layout.box.w - 12,
-        layout.box.y + layout.box.h - 10
-      );
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
     }
 
     ctx.restore();
   }
-<<<<<<< HEAD
-=======
-
-  // -------------------------------------------------------------------------
-  // Layout
-  // -------------------------------------------------------------------------
-  _layout() {
-    const choiceCount = this.choices.length;
-    const baseH  = 110;
-    const extraH = choiceCount * 36;
-    const bh     = baseH + extraH;
-    const bx     = 60;
-    const by     = CANVAS_HEIGHT - bh - 20;
-    const bw     = CANVAS_WIDTH - 120;
-
-    const choices = this.choices.map((_, i) => ({
-      x: bx + 10,
-      y: by + baseH - 10 + i * 36,
-      w: bw - 20,
-      h: 30
-    }));
-
-    return { box: { x: bx, y: by, w: bw, h: bh }, choices };
-  }
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
 }

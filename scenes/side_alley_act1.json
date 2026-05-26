@@ -21,11 +21,7 @@
         "yNear": 560,
         "yFar": 340,
         "scaleNear": 2.8,
-<<<<<<< HEAD
         "scaleFar": 0.7
-=======
-        "scaleFar": 0.4
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
       },
       "playerStart": {
         "x": 400,
@@ -33,7 +29,6 @@
       },
       "objects": [
         {
-<<<<<<< HEAD
           "id": "scientist_obj",
           "type": "npc",
           "x": 200,
@@ -103,58 +98,18 @@
           "label": "Dr. Schnurz"
         },
         {
-=======
-          "id": "door",
-          "src": null,
-          "x": 100,
-          "y": 65,
-          "w": 52,
-          "h": 400,
-          "label": "Tür",
-          "glow":null,          
-          "condition": null,
-          "actions": {
-            "look": "Hier geht es in die Wohnung des Wissenschaftlers.",
-            "take": null,
-            "use": { 
-              "goToScene": "entryway_act1",
-              "arriveAt": { "x": 106, "y": 520 }
-            }
-          }
-        },
-        {
-          "id": "scientist_obj",
-          "src": "assets/objects/scientist.png",
-          "x": 200,
-          "y": 280,
-          "w": 80,
-          "h": 130,
-          "label": "Wissenschaftler",
-          "walkTo": {"x" : "554", "y" : "431"},
-          "actions": {
-            "look": "Ein Mann mit Kittel Was der wohl macht?",
-            "take": null,
-            "use":  { "npc": "scientist" }
-        }
-      } ,
-        {
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
           "id": "muelleimer",
           "x": 265,
           "y": 325,
           "w": 60,
           "h": 60,
           "label": "Mülleimer",
-<<<<<<< HEAD
           "glow": {
             "frames": [ "assets/scenes/side_alley/act1/muelleimer_glow.png" ],
             "fps": 2,
             "x": 0,
             "y": 0            
           },
-=======
-          "glow": null,
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
           "condition": { "itemNotConsumed": "aetherkolben"
           },
           "actions": {
@@ -191,16 +146,12 @@
           "w": 100,
           "h": 30,
           "label": "Tor zur Straße",
-<<<<<<< HEAD
           "glow": {
             "frames": [ "assets/scenes/side_alley/act1/exit.png" ],
             "fps": 2,
             "x": 350,
             "y": 463            
           },
-=======
-          "glow": null,
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
           "condition": null,
           "actions": {
             "look": "Eine Pumpe! Die kann bestimmt Sachen einsaugen!",
@@ -210,7 +161,6 @@
         }
       ]
     }
-<<<<<<< HEAD
   ],
   "npcs": {
     "scientist": {
@@ -391,7 +341,4 @@
       }
     }
   }
-=======
-  ]
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
 }

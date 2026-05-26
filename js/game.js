@@ -14,13 +14,10 @@ class Game {
     this.sceneRenderer = new SceneRenderer(this.canvas, this.ctx);
     this.hotspots = new HotspotSystem();
     this.character = new Character();
-<<<<<<< HEAD
     this.character.loadSprite();
     this.audio  = new AudioSystem();
     this.radio  = new RadioSystem();
     this.radio.audio = this.audio;
-=======
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
     this.actionBar = new ActionBar();
     this.cursor = new CursorSystem(this.canvas);
     this.dialog = new DialogSystem();
@@ -28,10 +25,7 @@ class Game {
     this.npc = new NpcSystem();
     this.logbook = new Logbook();
     this.saveSystem = new SaveSystem();
-<<<<<<< HEAD
     this.intro = new IntroSystem();
-=======
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
 
     this.setupCanvasScaling(); // 🔥 HIER ist es stabil
         
@@ -83,19 +77,12 @@ class Game {
       this._handleClick(x, y);
     });
 
-<<<<<<< HEAD
     // Mausbewegung → Linse bewegen + Radio-Slider
-=======
-    // Mausbewegung → Linse bewegen
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
     this.canvas.addEventListener('mousemove', (e) => {
       const { x, y } = this._toCanvas(e.clientX, e.clientY);
       this.cursor.x = x;
       this.cursor.y = y;
-<<<<<<< HEAD
       if (this.radio.visible) { this.radio.handleMouseMove(x, y); return; }
-=======
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
       if (this.puzzle.active && this.puzzle.type === 'cloud_shoot') {
         this.puzzle._handleCloudShootInput(x, y, this._mouseHeld);
       }
@@ -105,20 +92,14 @@ class Game {
     this.canvas.addEventListener('mousedown', (e) => {
       const { x, y } = this._toCanvas(e.clientX, e.clientY);
       this._mouseHeld = true;
-<<<<<<< HEAD
       if (this.radio.visible) { this.radio.handleMouseDown(x, y); return; }
-=======
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
       if (this.puzzle.active && this.puzzle.type === 'cloud_shoot') {
         this.puzzle._handleCloudShootInput(x, y, true);
       }
     });
     this.canvas.addEventListener('mouseup', () => {
       this._mouseHeld = false;
-<<<<<<< HEAD
       this.radio.handleMouseUp();
-=======
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
       if (this.puzzle.active && this.puzzle.type === 'cloud_shoot') {
         this.puzzle._handleCloudShootInput(this.cursor.x, this.cursor.y, false);
       }
@@ -231,16 +212,12 @@ class Game {
   // Klick
   // -------------------------------------------------------------------------
   _handleClick(x, y) {
-<<<<<<< HEAD
     if (this.intro.active)        { this.intro.handleClick(x, y); return; }
-=======
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
     if (this.puzzle.active)   { this.puzzle.handleClick(x, y); return; }
     if (this.npc.active)      { this.npc.handleClick(x, y, this.inventory, this.itemDefs); return; }
     if (this.logbook.visible) { this.logbook.handleClick(x, y); return; }
     if (this.logbook.iconHit(x, y)) { this.logbook.toggle(); return; }
     if (this.dialog.handleClick()) return;
-<<<<<<< HEAD
 
     // Radio
     if (this.radio.visible) {
@@ -255,8 +232,6 @@ class Game {
       return;
     }
 
-=======
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
     if (this.actionBar.handleClick(x, y)) return;
 
     // Easter-Egg-Effekt wegklicken
@@ -525,10 +500,7 @@ class Game {
 
     // Objekt → komplexe Aktion
     if (result.dialog) this.dialog.show(result.dialog);
-<<<<<<< HEAD
     if (result.sound)  this.audio?.playSfx(result.sound);
-=======
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
     if (result.removeItem) {
       this.inventory.remove(item.id);
       this.logbook.logItem({ label: item.label }, 'used');
@@ -572,14 +544,11 @@ class Game {
   _executeAction(obj, action, actionData) {
     
     // Puzzle direkt starten
-<<<<<<< HEAD
     if (actionData?.openRadio) {
       this.radio.open();
       return;
     }
 
-=======
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
     if (actionData?.puzzle) {
       this.puzzle.start(actionData.puzzle, (result) => {
         if (actionData.puzzle.onSolveDialog) this.dialog.show(actionData.puzzle.onSolveDialog);
@@ -694,13 +663,10 @@ class Game {
     const sceneName = this.sceneRenderer.sceneData?.name || jsonPath;
     this.logbook?.logScene(sceneName);
     this.saveSystem?.save(this);
-<<<<<<< HEAD
 
     // Ambient der neuen Szene abspielen
     const ambient = this.sceneRenderer.sceneData?.ambient;
     this.audio?.playAmbient(ambient || null);
-=======
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
   }
 
   _syncObjects(arriveAt = null) {
@@ -714,10 +680,7 @@ class Game {
   // Game Loop
   // -------------------------------------------------------------------------
   update(deltaTime) {
-<<<<<<< HEAD
     if (this.intro.active || this.intro.fadingIn) { this.intro.update(performance.now()); if (this.intro.active) return; }
-=======
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
     if (this.sceneRenderer.isTransitioning) {
       this.sceneRenderer.update(deltaTime);
       if (!this.sceneRenderer.isTransitioning) this._syncObjects();
@@ -725,7 +688,6 @@ class Game {
     }
     this.sceneRenderer.update(deltaTime);
     this.character.update(deltaTime);
-<<<<<<< HEAD
     // Schritte
     const stepsSrc = this.sceneRenderer.sceneData?.stepsSrc || 'assets/audio/sfx/steps.mp3';
     if (this.character.walking) {
@@ -733,8 +695,6 @@ class Game {
     } else {
       this.audio?.stopSteps();
     }
-=======
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
     this.puzzle.update(deltaTime);
 
     const overObject = this.hotspots.isOverObject(
@@ -779,7 +739,6 @@ class Game {
     this.npc.draw(ctx);
     this.logbook.drawIcon(ctx);
     this.logbook.draw(ctx);
-<<<<<<< HEAD
     this.radio.draw(ctx);
 
     // Intro liegt über allem
@@ -793,12 +752,6 @@ class Game {
       this.sceneRenderer._drawHintButton();
       this.cursor.draw(ctx);
     }
-=======
-
-    if (DEBUG) this._drawDebug(ctx);
-
-    this.cursor.draw(ctx);
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
   }
 
   // -------------------------------------------------------------------------
@@ -1122,21 +1075,16 @@ class Game {
     this.drag = new DragSystem(this.canvas, this.inventory);
 
     this.setupInput();
-<<<<<<< HEAD
     this.setupDrag();
 
     // Audio initialisieren (Musik wird danach manuell gestartet)
     this.audio.init(this.radio.loadSettings(), false);
-=======
-    this.setupDrag();    
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
 
     const loaded = await this.saveSystem.applyTo(this, this.itemDefs);
     if (!loaded) await this.loadScene('scenes/street_act1.json');
 
     if (DEBUG && DEBUG_START_PUZZLE) this._startDebugPuzzle(DEBUG_START_PUZZLE);
 
-<<<<<<< HEAD
     // Intro nur beim ersten Start zeigen (kein gespeicherter Stand)
     if (!loaded) {
       if (INTRO_MUSIC_SRC) this.audio.playMusic(INTRO_MUSIC_SRC);
@@ -1149,8 +1097,6 @@ class Game {
       if (MUSIC_SRC) this.audio.playMusic(MUSIC_SRC);
     }
 
-=======
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
     console.log('☁️ A Cloud for Maybel gestartet');
     this.gameLoop(0);
   }

@@ -48,14 +48,10 @@
           "w": 100,
           "h": 60,
           "label": "Ausgang zum Park",
-<<<<<<< HEAD
           "glow": {
             "frames": [ "assets/scenes/cave/act1/exit.png" ],
             "fps": 2                       
           },
-=======
-          "glow": null,
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
           "condition": null,
           "actions": {
             "look": "Das ist ein Erdloch.",
@@ -74,20 +70,12 @@
           "type": "npc",
           "x": 250,
           "y": 440,
-<<<<<<< HEAD
           "walkTo": { "x": 489, "y": 445 },
           "visual": {
             "src": "assets/npc/amina_sprite.png",
             "scale": 0.3,
             "frameW": 1024,
             "frameH": 1024,
-=======
-          "visual": {
-            "src": "assets/npc/amina_sprite.png",
-            "scale": 1.3,
-            "frameW": 256,
-            "frameH": 256,
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
             "states": {
               "idle": {
                 "row": 0,
@@ -153,10 +141,7 @@
   "npcs": {
     "amina": {
       "name": "Amina",
-<<<<<<< HEAD
       "portrait": "assets/npc/amina_portrait.png",
-=======
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
       "entry": [
         {
           "condition": {
@@ -180,11 +165,7 @@
       },
       "dialog": {
         "start": {
-<<<<<<< HEAD
           "text": "Psst... nicht so laut. Die Kaninchen mögen keine Fremden. Vor allem nicht, wenn sie laut sind!",
-=======
-          "text": "Psst... nicht so laut. Die Kaninchen mögen keine Fremden.",
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
           "choices": [
             {
               "text": "Wer bist du?",
@@ -195,17 +176,12 @@
               "next": "story"
             },
             {
-<<<<<<< HEAD
               "text": "Okay... ich geh' wieder.",
-=======
-              "text": "Okay... ich geh wieder.",
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
               "next": null
             }
           ]
         },
         "vorstellung": {
-<<<<<<< HEAD
           "text": "Ich bin Amina. Früher... naja, ich hatte große Pläne! Aber jetzt lebe ich hier bei den Kaninchen. Sie nennen mich Muck-Muck. Ich habe noch nicht herausgefunden, wofür das steht.",
           "next": "story"
         },
@@ -217,15 +193,6 @@
               "next": "wolke"
             },
             {
-=======
-          "text": "Ich bin Amina. Früher... naja, ich hatte größere Pläne.",
-          "next": "story"
-        },
-        "story": {
-          "text": "Ich wollte eine Wolke fangen. Einfach so, aus dem Himmel reißen.\nIch hatte sogar eine Harpune gebaut.\n\nHat nicht funktioniert.\nAlle haben gelacht.\n\nAlso bin ich hier runter. Die Kaninchen stellen keine Fragen.",
-          "choices": [
-            {
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
               "text": "Du lebst jetzt echt bei Kaninchen?",
               "next": "kaninchen"
             },
@@ -239,7 +206,6 @@
             }
           ]
         },
-<<<<<<< HEAD
         "wolke": {
           "text": "Du bist schon mal kein Kaninchen. Du stellst Fragen.\n\nUm ehrlich zu sein: Ich dachte, wenn ich eine hätte... wäre endlich mal irgendwas anders.\nAlle schauen immer nach oben, aber die Leute, die unten sind, die sieht immer keiner.\nIch wollte, dass man sich an mich erinnert.",
           "next": "wolke1"
@@ -266,22 +232,6 @@
         },
         "tausch": {
           "text": "Ein Kissen...\nDas ist perfekt.\n\nHier. Nimm die Wolkenharpune.\nVielleicht klappt es ja bei dir besser als bei mir. \n\nOder du merkst rechtzeitig, dass Wolken nichts festhalten.",
-=======
-        "kaninchen": {
-          "text": "Die sind erstaunlich organisiert.\nAber ihre Höhlen sind hart wie Stein.\n\nIch hab seit Tagen nicht richtig geschlafen...",
-          "next": "wunsch"
-        },
-        "harpune": {
-          "text": "Die funktioniert theoretisch.\nPraktisch… naja.\nIch brauch sie hier unten eh nicht mehr.",
-          "next": "wunsch"
-        },
-        "wunsch": {
-          "text": "Wenn ich nur ein Kissen hätte...\nDann wäre das hier unten fast gemütlich.",
-          "next": null
-        },
-        "tausch": {
-          "text": "Ein Kissen...\nDas ist perfekt.\n\nHier. Nimm die Wolkenharpune.\nVielleicht klappt es ja bei dir besser als bei mir.",
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
           "trade": {
             "give": "kissen",
             "receive": "wolkenharpune"
@@ -298,11 +248,7 @@
         },
         "hat_schon_getauscht": {
           "text": "Die Harpune hast du ja schon.\n\nPass auf, dass du nicht auch unten landest wie ich.",
-<<<<<<< HEAD
           "next": "start"
-=======
-          "next": null
->>>>>>> dde5580fc818bd9cf6a18778711e6ee6b6bd5f7f
         },
         "falsch_item": {
           "text": "Das hilft mir hier unten nicht wirklich.",
