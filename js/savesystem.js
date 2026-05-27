@@ -17,6 +17,7 @@ class SaveSystem {
         usedHotspots:  this._serializeMap(game.usedHotspots),
         consumedItems: [...game.consumedItems],
         logbook:       game.logbook.toJSON(),
+        diary:         game.diary.toJSON(),
         timestamp:     Date.now()
       };
       localStorage.setItem(SAVE_KEY, JSON.stringify(data));
@@ -85,6 +86,9 @@ class SaveSystem {
 
     // Logbuch wiederherstellen
     game.logbook.fromJSON(data.logbook);
+
+    // Tagebuch wiederherstellen
+    game.diary.fromJSON(data.diary);
 
     return true;
   }

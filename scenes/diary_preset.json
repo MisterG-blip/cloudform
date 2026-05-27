@@ -1,0 +1,23 @@
+{
+  
+  "Ereignisse": [
+    {
+      "title": "Der erste Tag",
+      "text": "Heute habe ich zum ersten Mal eine Wolke gesehen, die sich nicht bewegte. Sie hing einfach da.",
+      "timestamp": "08:42"
+    },
+    {
+      "title": "Amina",
+      "text": "Amina sagt, Wolken haben keine Namen. Ich glaube ihr nicht.",
+      "timestamp": "14:15"
+    }
+  ],
+  "Items": [],
+  "Codes": [
+    {
+      "title": "Der erste Code",
+      "text": "Hier kommen bestimmt noch andere Einträge rein. Wahrscheinlich mach ich da Orte draus. Aber der Code für die Schatulle ist vorläufig 3721.",
+      "timestamp": "08:42"
+    }
+  ]
+}

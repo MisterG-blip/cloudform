@@ -11,9 +11,10 @@ const LOG_MAX_ENTRIES = 100;
 
 class Logbook {
   constructor() {
-    this.entries = [];   // [{ time, icon, text }]
+    this.entries = [];
     this.visible = false;
-    this.scrollY = 0;    // Scroll-Position
+    this.scrollY = 0;
+    this.diary   = null;  // wird von game.js gesetzt
   }
 
   // -------------------------------------------------------------------------
@@ -40,10 +41,12 @@ class Logbook {
       combined: `${item.label} entstanden.`
     };
     this.add(icons[action] || '•', texts[action] || `${item.label}`);
+    this.diary?.addItem(item.label, action, item.description || '');
   }
 
   logNpc(npcName, text) {
     this.add('💬', `${npcName}: „${text.substring(0, 60)}${text.length > 60 ? '…' : ''}"`);
+    this.diary?.addEvent(npcName, text);
   }
 
   logPuzzle(puzzleName, success) {

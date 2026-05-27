@@ -24,6 +24,8 @@ class Game {
     this.puzzle = new PuzzleSystem();
     this.npc = new NpcSystem();
     this.logbook = new Logbook();
+    this.diary   = new Diary();
+    this.logbook.diary = this.diary;
     this.saveSystem = new SaveSystem();
     this.intro = new IntroSystem();
 
@@ -217,6 +219,7 @@ class Game {
     if (this.npc.active)      { this.npc.handleClick(x, y, this.inventory, this.itemDefs); return; }
     if (this.logbook.visible) { this.logbook.handleClick(x, y); return; }
     if (this.logbook.iconHit(x, y)) { this.logbook.toggle(); return; }
+    if (this.diary.visible)  { this.diary.handleClick(x, y); return; }
     if (this.dialog.handleClick()) return;
 
     // Radio
@@ -272,6 +275,12 @@ class Game {
   _examineItem(item) {
     const def = this.itemDefs[item.id];
     this.inventory.clearActive();
+
+    // Tagebuch → öffnet das Diary-Overlay
+    if (item.id === 'tagebuch') {
+      this.diary.open();
+      return;
+    }
 
     // Easter Egg: easterEgg-Feld in items.json → Effekt auslösen, Item sofort entfernen
     if (def?.easterEgg) {
@@ -739,6 +748,7 @@ class Game {
     this.npc.draw(ctx);
     this.logbook.drawIcon(ctx);
     this.logbook.draw(ctx);
+    this.diary.draw(ctx);
     this.radio.draw(ctx);
 
     // Intro liegt über allem
@@ -1069,7 +1079,11 @@ class Game {
 
   async start() {
     console.log("🚀 START WIRD AUFGERUFEN");
+    
+    this.diary = new Diary();
+
     await this.loadItems();
+    await this.diary.loadPreset();    
 
     this.inventory = new Inventory(this.itemDefs);
     this.drag = new DragSystem(this.canvas, this.inventory);
