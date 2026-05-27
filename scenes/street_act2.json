@@ -173,7 +173,7 @@
         },
         {
           "id": "kosmisches_ei",
-          "src": "assets/items/kosmisches_ei.png",
+          "src": "assets/item/kosmisches_ei.png",
           "x": 280,
           "y": 450,
           "w": 60,

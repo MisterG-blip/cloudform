@@ -2,33 +2,33 @@
   "windessenz": {
     "emoji": "💨", "label": "Windessenz",
     "description": "Ein Hauch warmen Winds, eingefangen in der Luft.",
-    "src": "assets/items/windessenz.png"
+    "src": "assets/item/windessenz.png"
   },
   "feder": {
     "emoji": "🪶", "label": "Feder",
     "description": "Eine silbrige Feder. Federleicht.",
-    "src": "assets/items/feder.png",
+    "src": "assets/item/feder.png",
     "combinesWith": { "windessenz": "windfaenger" }
   },
   "windfaenger": {
     "emoji": "🌀", "label": "Windfänger",
     "description": "Feder und Windessenz vereint. Summt leise.",
-    "src": "assets/items/windfaenger.png"
+    "src": "assets/item/windfaenger.png"
   },
   "schluessel": {
     "emoji": "🗝️", "label": "Schlüssel",
     "description": "Ein alter Messingschlüssel.",
-    "src": "assets/items/schluessel.png"
+    "src": "assets/item/schluessel.png"
   },
   "tagebuch": {
     "label": "Tagebuch",
     "description": "Mein Tagebuch. Es weiß viel über mich. Aber ich weiß genauso viel über es.\n\nEs kann mich nicht erpressen.",
-    "src": "assets/items/tagebuch.png"
+    "src": "assets/item/tagebuch.png"
   },
   "schatulle": {
     "emoji": "📦", "label": "Schatulle",
     "description": "Eine alte Holzschatulle. Verschlossen.",
-    "src": "assets/items/schatulle.png",
+    "src": "assets/item/schatulle.png",
     "contains": "barometer_sehnsucht",
     "unlockedBy": "schluessel",
     "containsPuzzle": {
@@ -41,27 +41,27 @@
   "kissen": {
     "emoji": "⚙️", "label": "Kissen",
     "description": "Ein Kissen. Wer wohl eins braucht?",
-    "src": "assets/items/kissen.png"
+    "src": "assets/item/kissen.png"
   },
 
   "barometer_sehnsucht": {
     "emoji": "🧭", "label": "Barometer der Sehnsucht",
     "description": "Es zeigt an, was man sich am meisten wünscht.",
-    "src": "assets/items/barometer.png",
+    "src": "assets/item/barometer.png",
     "machinemPart": true,
     "act": 1
   },
   "wolkenharpune": {
     "emoji": "🔭", "label": "Wolkenharpune",
     "description": "Eine Art Zielvorrichtung. Fixiert Wolken mit einem Lichtstrahl.",
-    "src": "assets/items/wolkenharpune.png",
+    "src": "assets/item/wolkenharpune.png",
     "machinePart": true,
     "act": 1
   },
   "vakuumpumpe": {
     "emoji": "🔧", "label": "Vakuumpumpe",
     "description": "Saugt Wolken an. Surrt laut.",
-    "src": "assets/items/vakuumpumpe.png",
+    "src": "assets/item/vakuumpumpe.png",
     "machinePart": true,
     "slots": [
       { "id": "pressure",   "expectedItem": "barometer_sehnsucht", "item": null },
@@ -73,21 +73,21 @@
   "aetherkolben": {
     "emoji": "🫙", "label": "Ätherkolben",
     "description": "Ein durchsichtiger Behälter. Aufbewahrung für Wolken.",
-    "src": "assets/items/aetherkolben.png",
+    "src": "assets/item/aetherkolben.png",
     "machinePart": true,
     "act": 1
   },
   "phlogiston_zange": {
     "emoji": "⚡", "label": "Phlogiston-Zange",
     "description": "Damit kann man Sachen einsammeln.",
-    "src": "assets/items/zange.png",
+    "src": "assets/item/zange.png",
     "machinePart": false,
     "act": 1
   },
   "phlogiston": {
     "emoji": "⚡", "label": "Phlogiston",
     "description": "Energie ist Macht! Ich habe nun Macht!",
-    "src": "assets/items/phlogiston.png",
+    "src": "assets/item/phlogiston.png",
     "machinePart": false,
     "act": 1
   },
@@ -95,21 +95,21 @@
   "kosmisches_ei": {
     "emoji": "🥚", "label": "Kosmisches Ei",
     "description": "Warm. Pulsiert leise. Vielleicht gehört das woanders hin.",
-    "src": "assets/items/kosmisches_ei.png",
+    "src": "assets/item/kosmisches_ei.png",
     "easterEgg": { "effect": "galaxy", "src": null },
     "act": 1
   },
   "homunkulus_phiole": {
     "emoji": "🧪", "label": "Homunkulus Phiole",
     "description": "Kein echtes Leben… nur eine Idee davon.",
-    "src": "assets/items/homunculus_phiole.png",
+    "src": "assets/item/homunculus_phiole.png",
     "easterEgg": { "effect": "homunkulus", "src": null },
     "act": 1
   },
   "sulphorium_kristall": {
     "emoji": "💎", "label": "Sulphorium-Kristall",
     "description": "Die Seele der Materie. Oder doch ihre eigene?",
-    "src": "assets/items/sulphorium_kristall.png",
+    "src": "assets/item/sulphorium_kristall.png",
     "easterEgg": { "effect": "sulphorium", "src": null },
     "act": 1
   },
@@ -117,35 +117,35 @@
   "prismabrille": {
     "emoji": "🕶️", "label": "Prismabrille",
     "description": "Zeigt Wolken in ihren wahren Farben. Hell und Dunkel.",
-    "src": "assets/items/prismabrille.png",
+    "src": "assets/item/prismabrille.png",
     "machinePart": false,
     "act": 2
   },
   "windfluestertute": {
     "emoji": "📯", "label": "Windflüstertüte",
     "description": "Ein Blechtrichter. Schiebt schlechte Wolken zur Seite.",
-    "src": "assets/items/windfluestertute.png",
+    "src": "assets/item/windfluestertute.png",
     "machinePart": true,
     "act": 2
   },
   "traumdestillator": {
     "emoji": "🌀", "label": "Traumdestillator",
     "description": "Drückt Wolken aus. Setzt Albtraum-Essenz frei.",
-    "src": "assets/items/traumdestillator.png",
+    "src": "assets/item/traumdestillator.png",
     "machinePart": true,
     "act": 2
   },
   "miasma_glas": {
     "emoji": "🫧", "label": "Miasma-Glas",
     "description": "Sammelt schlechte Luft. Macht alles nur schlimmer.",
-    "src": "assets/items/miasma_glas.png",
+    "src": "assets/item/miasma_glas.png",
     "machinePart": true,
     "act": 2
   },
   "thermodynamisches_pendel": {
     "emoji": "⏳", "label": "Thermodynamisches Pendel",
     "description": "Soll Blitze abhalten. Wird durch Blitz zerstört.",
-    "src": "assets/items/thermodynamisches_pendel.png",
+    "src": "assets/item/thermodynamisches_pendel.png",
     "machinePart": true,
     "act": 2
   }

@@ -53,7 +53,7 @@
       },
       {
         "id": "vakuumpumpe_placed",
-        "src": "assets/items/vakuumpumpe_placed1.png",
+        "src": "assets/item/vakuumpumpe_placed1.png",
         "x": 584, "y": 221, "w": 150, "h": 150,
         "label": "Vakuumpumpe",
         "glow": null,

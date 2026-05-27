@@ -52,7 +52,7 @@
       },
       {
         "id": "homunkulus_phiole",
-        "src": "assets/items/homunculus_phiole.png",
+        "src": "assets/item/homunculus_phiole.png",
         "x": 380,
         "y": 265,
         "w": 75,

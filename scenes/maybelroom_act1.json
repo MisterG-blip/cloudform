@@ -133,7 +133,7 @@
         },
         {
           "id": "kissen",
-          "src": "assets/items/kissen.png",
+          "src": "assets/item/kissen.png",
           "x": 600,
           "y": 360,
           "w": 90,

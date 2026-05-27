@@ -125,7 +125,7 @@
         },        
         {
           "id": "vakuumpumpe",
-          "src": "assets/items/vakuumpumpe.png",
+          "src": "assets/item/vakuumpumpe.png",
           "x": 480,
           "y": 350,
           "w": 100,
