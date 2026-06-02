@@ -29,8 +29,16 @@ class Game {
     this.saveSystem = new SaveSystem();
     this.intro = new IntroSystem();
     this.presenter = new ItemPresenter();
-    this.isLoading = false;   // Ladescreen aktiv?
-    this._loadProgress = 0;   // 0-1
+    this.isLoading  = false;
+    this._loadT     = 0;
+    this._loadClouds = Array.from({length: 5}, (_, i) => ({
+      x: 80 + i * 145,
+      y: 200 + Math.sin(i * 1.3) * 35,
+      r: 28 + (i % 3) * 12,
+      speed: 0.3 + i * 0.08,
+      phase: i * 0.8,
+      alpha: 0,
+    }));
 
     this.setupCanvasScaling(); // 🔥 HIER ist es stabil
         
@@ -698,11 +706,11 @@ class Game {
 
   async loadScene(jsonPath, arriveAt = null) {
     this.isLoading = true;
-    this._loadProgress = 0;
-    this.character.stop();  // Maybel einfrieren
+    this._loadT    = 0;
+    this._loadClouds.forEach(c => c.alpha = 0);
+    if (this.character) this.character.stop();
 
     await this.sceneRenderer.load(jsonPath);
-
     const sceneItems = this.sceneRenderer.sceneData?.items || {};
     this.itemDefs = { ...this.itemDefs, ...sceneItems };
     this.hotspots.itemDefs = this.itemDefs;
@@ -715,8 +723,8 @@ class Game {
     const ambient = this.sceneRenderer.sceneData?.ambient;
     this.audio?.playAmbient(ambient || null);
 
-    // Kurze Pause damit alle Bilder rendern können, dann Ladescreen weg
-    await new Promise(r => setTimeout(r, 300));
+    // Kurzer Puffer damit Bilder rendern können
+    await new Promise(r => setTimeout(r, 350));
     this.isLoading = false;
   }
 
@@ -732,7 +740,7 @@ class Game {
   // -------------------------------------------------------------------------
   update(deltaTime) {
     if (this.intro.active || this.intro.fadingIn) { this.intro.update(performance.now()); if (this.intro.active) return; }
-    if (this.isLoading) return;  // Spiel einfrieren während Laden
+    if (this.isLoading) { this._loadT += deltaTime * 0.001; return; }
     if (this.presenter.active) { this.presenter.update(deltaTime); }
     if (this.sceneRenderer.isTransitioning) {
       this.sceneRenderer.update(deltaTime);
@@ -774,6 +782,12 @@ class Game {
   draw(deltaTime = 0) {
     const ctx = this.ctx;
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+    // Noch nicht bereit → nur Ladescreen
+    if (!this.inventory || !this.sceneRenderer) {
+      this._drawLoadingScreen(ctx);
+      return;
+    }
 
     // Szene (Layer + Objects) mit Condition-Prüfung
     this.sceneRenderer.draw(this.inventory, this.usedHotspots, this.consumedItems, deltaTime);
@@ -1118,16 +1132,52 @@ class Game {
   }
 
   _drawLoadingScreen(ctx) {
-    const pulse = 0.7 + 0.3 * Math.sin(performance.now() / 400);
+    const t = this._loadT;
+
+    // Schwarzer Hintergrund
     ctx.save();
-    ctx.fillStyle = 'rgba(0,0,0,0.85)';
+    ctx.fillStyle = '#0a0814';
     ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-    ctx.globalAlpha = pulse;
+
+    // Wolken
+    this._loadClouds.forEach((cl, i) => {
+      cl.alpha = Math.min(0.15 + i * 0.1, cl.alpha + 0.008);
+      const bobY  = Math.sin(t * 0.7 + cl.phase) * 6;
+      const driftX = Math.sin(t * cl.speed * 0.4 + cl.phase) * 18;
+      const x = cl.x + driftX;
+      const y = cl.y + bobY;
+
+      ctx.save();
+      ctx.globalAlpha = cl.alpha;
+      ctx.fillStyle   = 'rgba(180,160,230,1)';
+      ctx.beginPath();
+      ctx.arc(x,                          y,                          cl.r,       0, Math.PI * 2);
+      ctx.arc(x + cl.r * 0.7,            y - cl.r * 0.3,            cl.r * 0.7, 0, Math.PI * 2);
+      ctx.arc(x - cl.r * 0.6,            y - cl.r * 0.2,            cl.r * 0.6, 0, Math.PI * 2);
+      ctx.arc(x + cl.r * 1.3,            y + cl.r * 0.1,            cl.r * 0.5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    });
+
+    // Pulsierender Text
+    const pulse = 0.5 + 0.5 * Math.sin(t * 2.5);
+    ctx.globalAlpha = 0.4 + 0.4 * pulse;
     ctx.font         = '14px Georgia, serif';
-    ctx.fillStyle    = 'rgba(180,140,80,0.9)';
+    ctx.fillStyle    = 'rgba(180,140,80,1)';
     ctx.textAlign    = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('Laden …', CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+    ctx.fillText('Laden …', CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 + 60);
+
+    // Drei Punkte
+    const dots = Math.floor(t * 2) % 4;
+    for (let d = 0; d < 3; d++) {
+      ctx.globalAlpha = d < dots ? 0.8 : 0.15;
+      ctx.fillStyle   = 'rgba(180,140,80,1)';
+      ctx.beginPath();
+      ctx.arc(CANVAS_WIDTH / 2 - 16 + d * 16, CANVAS_HEIGHT / 2 + 85, 3, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
     ctx.restore();
   }
 
@@ -1144,8 +1194,13 @@ class Game {
     
     this.diary = new Diary();
 
+    // Ladescreen sofort zeigen
+    this.isLoading = true;
+    this._loadT    = 0;
+    this.gameLoop(0);  // Loop früh starten damit Ladescreen sichtbar ist
+
     await this.loadItems();
-    await this.diary.loadPreset();    
+    await this.diary.loadPreset();
 
     this.inventory = new Inventory(this.itemDefs);
     this.drag = new DragSystem(this.canvas, this.inventory);
@@ -1169,12 +1224,11 @@ class Game {
         console.log('Intro abgeschlossen');
       });
     } else {
-      // Savegame vorhanden → direkt Theme starten
       if (MUSIC_SRC) this.audio.playMusic(MUSIC_SRC);
     }
 
+    this.isLoading = false;
     console.log('☁️ A Cloud for Maybel gestartet');
-    this.gameLoop(0);
   }
 
   _startDebugPuzzle(puzzleId) {
