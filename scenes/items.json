@@ -79,7 +79,7 @@
   },
   "phlogiston_zange": {
     "emoji": "⚡", "label": "Phlogiston-Zange",
-    "description": "Damit kann man Sachen einsammeln.",
+    "description": "Greift Dinge, die du lieber nicht direkt anfassen solltest. Aus gutem Grund.",
     "src": "assets/item/zange.png",
     "machinePart": false,
     "act": 1

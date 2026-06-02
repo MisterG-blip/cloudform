@@ -28,6 +28,9 @@ class Game {
     this.logbook.diary = this.diary;
     this.saveSystem = new SaveSystem();
     this.intro = new IntroSystem();
+    this.presenter = new ItemPresenter();
+    this.isLoading = false;   // Ladescreen aktiv?
+    this._loadProgress = 0;   // 0-1
 
     this.setupCanvasScaling(); // 🔥 HIER ist es stabil
         
@@ -214,7 +217,9 @@ class Game {
   // Klick
   // -------------------------------------------------------------------------
   _handleClick(x, y) {
+    if (this.isLoading)           return;
     if (this.intro.active)        { this.intro.handleClick(x, y); return; }
+    if (this.presenter.active)    { this.presenter.handleClick(); return; }
     if (this.puzzle.active)   { this.puzzle.handleClick(x, y); return; }
     if (this.npc.active)      { this.npc.handleClick(x, y, this.inventory, this.itemDefs); return; }
     if (this.logbook.visible) { this.logbook.handleClick(x, y); return; }
@@ -581,15 +586,43 @@ class Game {
     if (action === 'take' && actionData) {
       const itemDef = this.itemDefs[actionData];
       if (!itemDef) { this.dialog.show(actionData); return; }
-      const added = this.inventory.add({ id: actionData, ...itemDef });
-      if (added) {
-        // Item als "eingesammelt" markieren — Hotspot verschwindet dauerhaft
-        this.consumedItems.add(actionData);
-        this.logbook.logItem({ label: itemDef.label }, 'found');
-        this.dialog.show(`${itemDef.emoji || ''} ${itemDef.label} eingesammelt!\n${itemDef.description || ''}`);
-      } else {
+
+      // Prüfen ob Platz im Inventar
+      if (this.inventory.has(actionData) || this.inventory.items.length >= INVENTORY_MAX) {
         this.dialog.show('Das habe ich schon, oder das Inventar ist voll.');
+        return;
       }
+
+      // Fundort: Objekt-Mitte als Startposition
+      const fromX = (obj.x || 0) + (obj.w || 64) / 2;
+      const fromY = (obj.y || 0) + (obj.h || 64) / 2;
+
+      // Ziel-Slot: nächster freier Slot
+      const slotIndex = this.inventory.items.length;
+      const slotPos   = this.inventory.slotPos(slotIndex);
+
+      // Bild vorladen falls nötig
+      const img = itemDef.src ? this.inventory.images[itemDef.src] || (() => {
+        const i = new Image(); i.src = itemDef.src;
+        this.inventory.images[itemDef.src] = i; return i;
+      })() : null;
+
+      // Presenter starten — Item wird erst nach der Animation ins Inventar gelegt
+      this.presenter.present(
+        { id: actionData, ...itemDef },
+        itemDef,
+        img,
+        fromX, fromY,
+        slotPos,
+        () => {
+          // Animation fertig → Item ins Inventar
+          const added = this.inventory.add({ id: actionData, ...itemDef });
+          if (added) {
+            this.consumedItems.add(actionData);
+            this.logbook.logItem({ label: itemDef.label, description: itemDef.description }, 'found');
+          }
+        }
+      );
     }
   }
 
@@ -664,7 +697,12 @@ class Game {
   }
 
   async loadScene(jsonPath, arriveAt = null) {
+    this.isLoading = true;
+    this._loadProgress = 0;
+    this.character.stop();  // Maybel einfrieren
+
     await this.sceneRenderer.load(jsonPath);
+
     const sceneItems = this.sceneRenderer.sceneData?.items || {};
     this.itemDefs = { ...this.itemDefs, ...sceneItems };
     this.hotspots.itemDefs = this.itemDefs;
@@ -676,6 +714,10 @@ class Game {
     // Ambient der neuen Szene abspielen
     const ambient = this.sceneRenderer.sceneData?.ambient;
     this.audio?.playAmbient(ambient || null);
+
+    // Kurze Pause damit alle Bilder rendern können, dann Ladescreen weg
+    await new Promise(r => setTimeout(r, 300));
+    this.isLoading = false;
   }
 
   _syncObjects(arriveAt = null) {
@@ -690,6 +732,8 @@ class Game {
   // -------------------------------------------------------------------------
   update(deltaTime) {
     if (this.intro.active || this.intro.fadingIn) { this.intro.update(performance.now()); if (this.intro.active) return; }
+    if (this.isLoading) return;  // Spiel einfrieren während Laden
+    if (this.presenter.active) { this.presenter.update(deltaTime); }
     if (this.sceneRenderer.isTransitioning) {
       this.sceneRenderer.update(deltaTime);
       if (!this.sceneRenderer.isTransitioning) this._syncObjects();
@@ -755,6 +799,10 @@ class Game {
     if (this.intro.active) this.intro.draw(ctx, performance.now());
     // Fade-In nach Intro über dem Gameplay
     this.intro.drawFadeIn(ctx);
+    // Item-Presenter
+    this.presenter.draw(ctx);
+    // Ladescreen
+    if (this.isLoading) this._drawLoadingScreen(ctx);
 
     if (DEBUG) this._drawDebug(ctx);
 
@@ -1066,6 +1114,20 @@ class Game {
     ctx.beginPath();
     ctx.arc(this.tapEffect.x, this.tapEffect.y, 18 * (1 - this.tapEffect.alpha * 0.5), 0, Math.PI * 2);
     ctx.stroke();
+    ctx.restore();
+  }
+
+  _drawLoadingScreen(ctx) {
+    const pulse = 0.7 + 0.3 * Math.sin(performance.now() / 400);
+    ctx.save();
+    ctx.fillStyle = 'rgba(0,0,0,0.85)';
+    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    ctx.globalAlpha = pulse;
+    ctx.font         = '14px Georgia, serif';
+    ctx.fillStyle    = 'rgba(180,140,80,0.9)';
+    ctx.textAlign    = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('Laden …', CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
     ctx.restore();
   }
 
