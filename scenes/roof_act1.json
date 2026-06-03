@@ -126,7 +126,8 @@
               "startPuzzle": {
                 "type": "cloud_shoot",
                 "goal": 10,
-                "goToScene": "roof_act2"
+                "onSolveCutscene": "roof_to_act2",
+                "onSolveScene": "roof_act2"
               }
             }
           }

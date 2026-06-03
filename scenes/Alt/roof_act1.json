@@ -3,7 +3,7 @@
   "screens": [{
     "id": "screen_1",
     "layers": [
-      { "src": "assets/scenes/roof/act1/bg.png", "placeholder": "#c8dff0" }
+      { "src": "assets/scenes/roof/act1/bg.png", "placeholder": "#c8dff0" }      
     ],
     "walkarea": {
         "points": [
@@ -18,8 +18,8 @@
     "depthscale": {
         "yNear": 560,
         "yFar": 340,
-        "scaleNear": 1.5,
-        "scaleFar": 1.3
+        "scaleNear": 3,
+        "scaleFar":  1.1
     },
     "playerStart": {
         "x": 280,
@@ -30,7 +30,10 @@
         "id": "abstieg",
         "x": 170, "y": 342, "w": 100, "h": 120,
         "label": "Leiter (runter)",
-        "glow": null,
+        "glow": {
+            "frames": [ "assets/scenes/roof/act1/abstieg.png" ],
+            "fps": 2                       
+          },
         "condition": null,
         "actions": {
           "look": "Die Leiter zurück zur Straße.",
@@ -41,38 +44,92 @@
       },
       {
         "id": "wolken",
-        "x": 150, "y": 10, "w": 600, "h": 120,
+        "x": 350, "y": 10, "w": 400, "h": 80,
         "label": "Wolken",
-        "glow": null,
+        "glow": {
+            "frames": [ "assets/scenes/roof/act1/clouds.png" ],
+            "fps": 2                       
+          },
         "condition": null,
         "actions": {
           "look": "So viele Wolken! Eine davon sieht besonders schön aus. Wie schön wäre es, sie zu besitzen...",
-          "take": "Viel zu weit weg! Vielleicht kann man sie einsaugen?",
-          "use":  "Ich kann sie so nicht erreichen. Ich brauche etwas dafür."
+          "take": "Viel zu weit weg! Ich komme nicht ran.",
+          "use":  "Ich kann sie so nicht erreichen. Ich brauche etwas dafür.",
+          "useWith": {
+            "phlogiston_zange": {
+              "text": "Zu flüchtig... So kann ich sie nicht festhalten."            
+            }
+          }
         }
       },
       {
         "id": "sonne",
-        "x": 50, "y": 10, "w": 100, "h": 120,
+        "x": 100, "y": 10, "w": 100, "h": 80,
         "label": "Sonne",
-        "glow": null,
+        "glow": {
+            "frames": [ "assets/scenes/roof/act1/sun.png" ],
+            "fps": 2
+          },
         "condition": null,
         "actions": {
           "look": "Man soll nicht in die Sonne gucken.",
           "take": "Viel zu weit weg! Vielleicht kann man sie mit einer Zange packen.",
-          "use":  "Mit einem Solarpanal vielleicht. Aber hier ist keines. Vielleicht geht es auch anders."
+          "use":  "Mit einem Solarpanal vielleicht. Aber hier ist keines. Vielleicht geht es auch anders.",
+          "useWith": {
+            "phlogiston_zange": {
+              "text": "Die Eszens des Feuers... Phlogiston!!!",
+              "giveItem": "phlogiston" 
+            }
+          }
         }
       },
       {
         "id": "stellplatz",
-        "x": 584, "y": 321, "w": 100, "h": 50,
+        "x": 584, "y": 321, "w": 100, "h": 100,
         "label": "Stellplatz",
-        "glow": null,
-        "condition": {"itemInInventory": "vakuumpumpe"},
+        "glow": {
+            "frames": [ "assets/scenes/roof/act1/spot.png" ],
+            "fps": 2          
+          },
+        "condition": {
+          "allConditions": [
+              { "machineComplete": "vakuumpumpe" },
+              { "itemNotConsumed": "vakuumpumpe_placed" }              
+          ]
+        },
         "actions": {
-          "look": "Man soll nicht in die Wolken gucken.",
+          "look": "Ein freier Platz auf dem Dach. Genau die richtige Größe für eine Maschine.",
           "take": null,
-          "use":  "Mit einem Solarpanal vielleicht. Aber hier ist keines. Vielleicht geht es auch anders."
+          "use": "Ich sollte die Pumpe einfach hier abstellen.",
+          "useWith": {
+            "vakuumpumpe": {
+              "dialog": "✨ Die Vakuumpumpe steht! Sie surrt leise und zeigt auf die Wolken.",
+              "consumeItem": "vakuumpumpe_placed"
+            }
+          }
+        }
+      },
+      {
+        "id": "vakuumpumpe_placed",
+        "src": "assets/item/vakuumpumpe_placed1.png",
+        "x": 584, "y": 221, "w": 150, "h": 150,
+        "label": "Vakuumpumpe",
+        "glow": null,
+        "condition": { "itemConsumed": "vakuumpumpe_placed" },
+        "actions": {
+          "look": "Die Vakuumpumpe ist bereit. Es fehlt noch an Energie. Solar wäre nice!",
+          "take": "Sie ist fest verankert. Die bleibt hier.",
+          "use":  "Ohne Energie geht hier nichts. Wind Energie haben wir nicht.",
+          "useWith": {
+            "phlogiston": {
+              "dialog": "Das Phlogiston startet die Pumpe! Los schnell an die Wolkenharpune...",
+              "startPuzzle": {
+                "type": "cloud_shoot",
+                "goal": 10,
+                "goToScene": "roof_act2"
+              }
+            }
+          }
         }
       }
     ]

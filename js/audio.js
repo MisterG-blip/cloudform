@@ -9,7 +9,7 @@ class AudioSystem {
     // Lautstärken (0-1) — werden vom Radio gesetzt
     this.vol = {
       master:  1.0,
-      music:   0.6,
+      music:   0.25,
       ambient: 0.5,
       sfx:     0.8,
       steps:   0.5,

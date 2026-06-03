@@ -1,0 +1,140 @@
+{
+  "id": "labor_act2",
+  "screens": [{
+    "id": "screen_1",
+    "layers": [
+      { "src": "assets/scenes/labor/act2/bg.png", "placeholder": "#7ab648" }
+    ],
+    "walkarea": {
+        "points": [
+          { "x": 90,  "y": 600 },
+          { "x": 225, "y": 600 },
+          { "x": 295, "y": 485 },
+
+          { "x": 509, "y": 485 },
+          { "x": 550, "y": 600 },
+          { "x": 800, "y": 600 },  
+
+          { "x": 592, "y": 437 }, 
+          { "x": 140, "y": 437 },
+          { "x": 150, "y": 513 } 
+        ]
+      },
+      "depthscale": {
+        "yNear": 580,
+        "yFar": 395,
+        "scaleNear": 1.5,
+        "scaleFar":  0.9
+      },
+      "characterScale": 2.0,
+      "playerStart": {
+        "x": 599,
+        "y": 479
+      },
+    "objects": [
+      {
+        "id": "ausgang",
+        "x": 80,
+        "y": 140,
+        "w": 60,
+        "h": 270,
+        "label": "Ausgang",
+        "glow": null,
+        "condition": null,
+        "actions": {
+          "look": "Hier geht es zurück",
+          "take": null,
+          "use": {
+              "goToScene": "entryway_act2",
+              "arriveAt": { "x": 386, "y": 390 }
+            }
+        }
+      },
+      {
+        "id": "homunkulus_phiole",
+        "src": "assets/item/homunculus_phiole.png",
+        "x": 380,
+        "y": 265,
+        "w": 75,
+        "h": 75,
+        "label": "Homunkulus",
+        "glow": null,
+        "condition": {"itemNotConsumed": "homunkulus_phiole"},
+        "actions": {
+          "look": "Was ist das... sieht eklig aus.",
+          "take": "homunkulus_phiole",
+          "use": ""
+        }
+      }   
+    ],
+  "npcs": {
+    "amina": {
+      "name": "Amina",
+      "entry": [
+       { "condition": { "itemInInventory": "wolkenharpune" }, "node": "hat_schon_getauscht" },
+       { "condition": { "itemInInventory": "kissen" }, "node": "hat_kissen" },
+       { "node": "start" }
+      ],
+      "giveEntries": {
+       "kissen": "tausch",
+       "*": "falsch_item"
+      },
+      "dialog": {
+         "start": {
+            "text": "Psst... nicht so laut. Die Kaninchen mögen keine Fremden.",
+          "choices": [
+             { "text": "Wer bist du?", "next": "vorstellung" },
+             { "text": "Warum lebst du hier unten?", "next": "story" },
+             { "text": "Okay... ich geh wieder.", "next": null }
+           ]
+          },
+        "vorstellung": {
+         "text": "Ich bin Amina. Früher... naja, ich hatte größere Pläne.",
+         "next": "story"
+        },
+        "story": {
+          "text": "Ich wollte eine Wolke fangen. Einfach so, aus dem Himmel reißen.\nIch hatte sogar eine Harpune gebaut.\n\nHat nicht funktioniert.\nAlle haben gelacht.\n\nAlso bin ich hier runter. Die Kaninchen stellen keine Fragen.",
+          "choices": [
+           { "text": "Du lebst jetzt echt bei Kaninchen?", "next": "kaninchen" },
+           { "text": "Und die Harpune?", "next": "harpune" },
+            { "text": "Okay… viel Glück noch.", "next": null }
+          ]
+        },
+        "kaninchen": {
+          "text": "Die sind erstaunlich organisiert.\nAber ihre Höhlen sind hart wie Stein.\n\nIch hab seit Tagen nicht richtig geschlafen...",
+          "next": "wunsch"
+        },
+        "harpune": {
+         "text": "Die funktioniert theoretisch.\nPraktisch… naja.\nIch brauch sie hier unten eh nicht mehr.",
+          "next": "wunsch"
+        },  
+        "wunsch": {
+         "text": "Wenn ich nur ein Kissen hätte...\nDann wäre das hier unten fast gemütlich.",
+         "next": null
+        },
+        "tausch": {
+         "text": "Ein Kissen...\nDas ist perfekt.\n\nHier. Nimm die Wolkenharpune.\nVielleicht klappt es ja bei dir besser als bei mir.",
+         "trade": { "give": "kissen", "receive": "wolkenharpune" },
+         "next": "nach_tausch"
+        },
+        "nach_tausch": {
+         "text": "Jetzt ist es hier unten endlich weich.\n\nUnd du? Versuch nicht zu hoch zu zielen.",
+         "next": null
+        },
+        "hat_kissen": {
+         "text": "Du hast da ein Kissen...\nWillst du tauschen?",
+         "next": null
+        },
+        "hat_schon_getauscht": {
+         "text": "Die Harpune hast du ja schon.\n\nPass auf, dass du nicht auch unten landest wie ich.",
+         "next": null
+        },
+        "falsch_item": {
+          "text": "Das hilft mir hier unten nicht wirklich.",
+          "next": null
+        }
+      }
+    }
+  }}],
+"items": {}
+}

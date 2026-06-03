@@ -1,5 +1,5 @@
 // ============================================================================
-// GAME – A Cloud for Maybel
+// GAME – A Cloud for Maybel (Presenter funktionert)
 // ============================================================================
 
 class Game {
@@ -27,8 +27,9 @@ class Game {
     this.diary   = new Diary();
     this.logbook.diary = this.diary;
     this.saveSystem = new SaveSystem();
-    this.intro = new IntroSystem();
-    this.presenter = new ItemPresenter();
+    this.intro      = new IntroSystem();
+    this.cutscene   = new CutsceneSystem();
+    this.presenter  = new ItemPresenter();
     this.isLoading  = false;
     this._loadT     = 0;
     this._loadClouds = Array.from({length: 5}, (_, i) => ({
@@ -116,6 +117,11 @@ class Game {
       if (this.puzzle.active && this.puzzle.type === 'cloud_shoot') {
         this.puzzle._handleCloudShootInput(this.cursor.x, this.cursor.y, false);
       }
+    });
+
+    window.addEventListener('mouseup', () => {
+      this.radio.handleMouseUp();
+      this._mouseHeld = false;
     });
 
     // Touch: wischen bewegt Linse, gedrückt halten saugt ein
@@ -227,19 +233,15 @@ class Game {
   _handleClick(x, y) {
     if (this.isLoading)           return;
     if (this.intro.active)        { this.intro.handleClick(x, y); return; }
+    if (this.cutscene.active)     { this.cutscene.handleClick(); return; }
     if (this.presenter.active)    { this.presenter.handleClick(); return; }
     if (this.puzzle.active)   { this.puzzle.handleClick(x, y); return; }
     if (this.npc.active)      { this.npc.handleClick(x, y, this.inventory, this.itemDefs); return; }
     if (this.logbook.visible) { this.logbook.handleClick(x, y); return; }
     if (this.logbook.iconHit(x, y)) { this.logbook.toggle(); return; }
+    if (this.radio.visible)       return;
     if (this.diary.visible)  { this.diary.handleClick(x, y); return; }
     if (this.dialog.handleClick()) return;
-
-    // Radio
-    if (this.radio.visible) {
-      this.radio.handleMouseDown(x, y);
-      return;
-    }
 
     // Hint-Button
     const hb = this.sceneRenderer.hintButtonRect();
@@ -545,9 +547,23 @@ class Game {
     if (result.giveItem) {
       const def = this.itemDefs[result.giveItem];
       if (def) {
-        this.inventory.add({ id: result.giveItem, ...def });
-        this.consumedItems.add(result.giveItem);       
-        this.logbook.logItem({ label: def.label }, 'found');
+        const slotIndex = this.inventory.items.length;
+        const slotPos   = this.inventory.slotPos(slotIndex);
+        const img = def.src ? (this.inventory.images[def.src] || (() => {
+          const i = new Image(); i.src = def.src;
+          this.inventory.images[def.src] = i; return i;
+        })()) : null;
+        const fromX = (obj.x || 0) + (obj.w || 64) / 2;
+        const fromY = (obj.y || 0) + (obj.h || 64) / 2;
+        this.presenter.present(
+          { id: result.giveItem, ...def },
+          def, img, fromX, fromY, slotPos,
+          () => {
+            this.inventory.add({ id: result.giveItem, ...def });
+            this.consumedItems.add(result.giveItem);
+            this.logbook.logItem({ label: def.label, description: def.description }, 'found');
+          }
+        );
       }
     }
     if (result.puzzle || result.startPuzzle) {
@@ -556,6 +572,13 @@ class Game {
       this.puzzle.start(cfg, (r) => {
         this.canvas.style.cursor = 'default';
         if (cfg.onSolveDialog) this.dialog.show(cfg.onSolveDialog);
+        if (cfg.onSolveCutscene) {
+          this.cutscene.play(cfg.onSolveCutscene, () => {
+            if (cfg.onSolveScene) this.loadScene(`scenes/${cfg.onSolveScene}.json`);
+          });
+        } else if (cfg.onSolveScene) {
+          this.loadScene(`scenes/${cfg.onSolveScene}.json`);
+        }
       });
     }
   }
@@ -740,6 +763,7 @@ class Game {
   // -------------------------------------------------------------------------
   update(deltaTime) {
     if (this.intro.active || this.intro.fadingIn) { this.intro.update(performance.now()); if (this.intro.active) return; }
+    if (this.cutscene.active || this.cutscene.fadingIn) { this.cutscene.update(performance.now()); if (this.cutscene.active) return; }
     if (this.isLoading) { this._loadT += deltaTime * 0.001; return; }
     if (this.presenter.active) { this.presenter.update(deltaTime); }
     if (this.sceneRenderer.isTransitioning) {
@@ -813,6 +837,9 @@ class Game {
     if (this.intro.active) this.intro.draw(ctx, performance.now());
     // Fade-In nach Intro über dem Gameplay
     this.intro.drawFadeIn(ctx);
+    // Cutscene
+    if (this.cutscene.active) this.cutscene.draw(ctx, performance.now());
+    this.cutscene.drawFadeIn(ctx);
     // Item-Presenter
     this.presenter.draw(ctx);
     // Ladescreen

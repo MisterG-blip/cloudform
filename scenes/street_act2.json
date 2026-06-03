@@ -1,5 +1,5 @@
 {
-  "id": "street_act1",
+  "id": "street_act2",
   "screens": [
     {
       "id": "screen_1",
@@ -44,7 +44,6 @@
           "label": "Laterne",
           "glow": {
             "frames": [
-              "assets/scenes/street/act1/laterne_normal.png",
               "assets/scenes/street/act1/laterne_glow.png"
             ],
             "fps": 2
@@ -85,7 +84,7 @@
             "look": "Hier geht es zur Seitenstraße.",
             "take": "Wie soll ich das machen?",
             "use": {
-              "goToScene": "side_alley_act1"
+              "goToScene": "side_alley_act2"
             }
           }
         },
@@ -133,7 +132,7 @@
             "look": "Die Haustür. Sie führt in mein Zimmer.",
             "take": null,
             "use": {
-              "goToScene": "maybelroom_act1"
+              "goToScene": "maybelroom_act2"
             }
           }
         },
@@ -150,7 +149,7 @@
             "look": "Eine alte Feuertreppe. Sie führt aufs Dach. Von dort oben hat man bestimmt eine gute Sicht auf die Wolken.",
             "take": null,
             "use": {
-              "goToScene": "roof_act1"
+              "goToScene": "roof_act2"
             }
           }
         },
@@ -167,7 +166,7 @@
             "look": "Ein schmaler Weg der nach links führt. Irgendwo da drüben ist der Park.",
             "take": null,
             "use": {
-              "goToScene": "park_act1", "arriveAt": { "x": 770, "y": 350 }
+              "goToScene": "park_act2", "arriveAt": { "x": 770, "y": 350 }
             }
           }
         },

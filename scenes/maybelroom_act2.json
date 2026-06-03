@@ -1,0 +1,180 @@
+{
+  "id": "maybelroom_act2",
+  "ambient": "assets/audio/ambient/maybel.mp3",
+  "screens": [{
+      "id": "screen_1",
+      "layers": [
+        { "src": "assets/scenes/maybelroom/act2/bg.png", "placeholder": "#d4a8c7" }
+      ],
+      "walkarea": {
+        "points": [
+          { "x": 0,   "y": 580 },
+          { "x": 0,   "y": 555 },
+          { "x": 110, "y": 555 },          
+          { "x": 226, "y": 460 },
+          { "x": 375, "y": 460 },
+          { "x": 490, "y": 475 },
+          { "x": 560, "y": 535 },          
+          { "x": 800, "y": 580 }                   
+        ]
+      },
+      "depthscale": {
+        "yNear": 580,
+        "yFar": 395,
+        "scaleNear": 1.5,
+        "scaleFar": 1.25
+      },
+      "characterScale": 2.0,
+      "playerStart": { "x": 400, "y": 520 },
+      "objects": [
+        {
+          "id": "tuer_raus",
+          "src": null,
+          "x": 230,
+          "y": 140,
+          "w": 120,
+          "h": 300,
+          "label": "Tür (raus)",
+          "glow": null,
+          "condition": null,          
+          "actions": {
+            "look": "Die Tür nach draußen. Die Straße wartet.",
+            "take": "Eine Tür passt nicht in die Tasche. Aber vielleicht der Knauf?",
+            "use": { "goToScene": "street_act2", "arriveAt": { "x": 685, "y": 430 }
+            }
+          }
+        },
+        {
+          "id": "schreibtisch",
+          "src": null,
+          "x": 0,
+          "y": 350,
+          "w": 220,
+          "h": 30,
+          "label": "Schreibtisch",
+          "glow": {
+            "frames": [ "assets/scenes/maybelroom/act1/desk.png" ],
+            "fps": 2                       
+          },
+          "condition": null,
+          "walkTo": { "x": 210, "y": 500 },
+          "actions": {
+            "look": {
+              "default": "Mein Schreibtisch. Ich müsste ja eigentlich noch lernen. Da sind noch Schubladen!",
+              "states": {"itemInInventory:schatulle": "Mein Schreibtisch. Ich lerne später.\nIch habe wichtigeres zu tun."}},
+            "take": "Meine Tasche ist nicht groß genug.",
+            "use": "Ich habe jetzt keine Lust zu lernen."
+          }
+        },
+        {
+          "id": "schublade",
+          "src": null,
+          "x": 120,
+          "y": 390,
+          "w": 50,
+          "h": 120,
+          "label": "Schublade",
+          "glow": {
+            "frames": [ "assets/scenes/maybelroom/act1/schubladen.png" ],
+            "fps": 2                       
+          },
+          "condition": {
+            "hotspotUsedWith": { "id": "schreibtisch", "action": "look" }
+          },
+          "walkTo": { "x": 210, "y": 500 },
+          "actions": {
+            "look": {
+              "default": "Eine halb geöffnete Schublade. Da liegt eine alte Holzschatulle drin!",
+              "states": {"itemInInventory:schatulle": "Die Schubladen sind leer."}},
+            "take": "schatulle",
+            "use": "Ich wühle kurz durch den Kram...\nNicht weiter drin."
+          }
+        },        
+        {
+          "id": "bett",
+          "src": null,
+          "x": 500,
+          "y": 320,
+          "w": 250,
+          "h": 160,
+          "label": "Bett",
+          "glow": {
+            "frames": [ "assets/scenes/maybelroom/act1/bett.png" ],
+            "fps": 2                       
+          },
+          "condition": {"hotspotNotUsed": { "id": "bett", "action": "take" }
+          },
+          "walkTo": { "x": 430, "y": 511 },
+          "actions": {
+            "look": "Mein Bett. Der Teddy schaut mich vorwurfsvoll an.",
+            "take": "Das Ganze Bett mitnehmen? - Vielleicht nur das Kissen?",
+            "use": "Keine Zeit zum Schlafen. Ich will eine Wolke fangen!"
+          }
+        },
+        {
+          "id": "rucksack",
+          "src": null,
+          "x": 720,
+          "y": 500,
+          "w":  80,
+          "h": 100,
+          "label": "Rucksack",
+          "glow": {
+            "frames": [ "assets/scenes/maybelroom/act1/rucksack.png" ],
+            "fps": 2                       
+          },
+          "condition": null,
+          "walkTo": { "x": 640, "y": 550 },
+          "actions": {
+            "look": "Yes Schulsachen... und mein Tagebuch.",
+            "take": "tagebuch",
+            "use": "Brauche ich jetzt nicht. Ich hab doch meinen Hoodie. Die Tasche ist groß genug."
+          }
+        },
+        {
+          "id": "kissen",
+          "src": "assets/item/kissen.png",
+          "x": 600,
+          "y": 360,
+          "w": 90,
+          "h": 90,
+          "label": "Kissen",
+          "glow": null,
+          "condition": {
+            "itemNotInInventory": "kissen"
+          },
+          "clickable": {"hotspotUsedWith": { "id": "bett", "action": "take" }
+          },
+          "walkTo": { "x": 430, "y": 511 },
+          "actions": {
+            "look": "Ja! Das ist ein Kissen!",
+            "take": "kissen",
+            "use":  "Es ist weich."
+          }
+        },
+        {
+          "id": "radio",
+          "x": 160,
+          "y": 240,
+          "w": 40,
+          "h": 25,
+          "label": "Radio",
+          "glow": {
+            "frames": [ "assets/scenes/maybelroom/act1/radio.png" ],
+            "fps": 2                       
+          },
+          "condition": null,
+          "walkTo": {
+            "x": 250,
+            "y": 470
+          },
+          "actions": {
+            "look": "Ein altes Radio. Es spielt leise Musik.",
+            "take": "Was soll ich mit einem Radio? Ich will doch eine Wolke!",
+            "use": { "openRadio": true }
+          }
+        }
+      ]
+    }
+  ]
+}
