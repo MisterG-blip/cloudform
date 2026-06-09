@@ -1,5 +1,5 @@
 // ============================================================================
-// LOGBUCH – A Cloud for Maybel
+// LOGBUCH – A Cloud for ...
 // Automatisches Tagebuch. Wird befüllt durch:
 //   - Items einsammeln / verlieren
 //   - NPC-Dialoge
@@ -117,7 +117,7 @@ class Logbook {
     ctx.fillStyle = '#ffe080';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
-    ctx.fillText('📓 Maybels Tagebuch', bx + bw / 2, by + 16);
+    ctx.fillText('📓 Tagebuch', bx + bw / 2, by + 16);
 
     // Trennlinie
     ctx.strokeStyle = 'rgba(255,220,80,0.2)';

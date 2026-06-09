@@ -1,5 +1,5 @@
 // ============================================================================
-// ACTION BAR – A Cloud for Maybel
+// ACTION BAR – A Cloud for ...
 // Drei Modi: look / take / use. Horizontal links vom Inventar.
 // ============================================================================
 

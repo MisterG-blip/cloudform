@@ -1,5 +1,5 @@
 // ============================================================================
-// CURSOR SYSTEM – A Cloud for Maybel
+// CURSOR SYSTEM – A Cloud for ...
 // Ersetzt den System-Cursor durch eine gezeichnete Hand.
 // Drei Zustände: normal (zeigend) / hover (leuchtend) / click (greifend)
 // Farbe ändert sich je nach Aktionsmodus.

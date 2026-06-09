@@ -1,5 +1,5 @@
 // ============================================================================
-// INVENTAR – A Cloud for Maybel
+// INVENTAR – A Cloud for ...
 // Max. 5 Items. Unterstützt PNG/GIF-Bilder, aktive Selektion,
 // Item-in-Item (contains), Kombinationsregeln.
 // ============================================================================

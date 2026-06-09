@@ -1,5 +1,5 @@
 // ============================================================================
-// ITEM PRESENTER – A Cloud for Maybel
+// ITEM PRESENTER – A Cloud for ...
 // Präsentiert ein neu eingesammeltes Item:
 //  1. Item wächst vom Fundort zur Bildschirmmitte (mit Rahmen + Beschreibung)
 //  2. Klick → Item schrumpft und fliegt zum richtigen Inventar-Slot

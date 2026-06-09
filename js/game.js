@@ -1,5 +1,5 @@
 // ============================================================================
-// GAME – A Cloud for Maybel (Presenter funktionert)
+// GAME – A Cloud for ... (Presenter funktionert)
 // ============================================================================
 
 class Game {
@@ -1104,7 +1104,7 @@ class Game {
       ctx.fillText(`[${obj.id}]`, b.x + 3, b.y + 12);
     }
 
-    // Maybel-Position
+    // Ms-Position
     ctx.fillStyle = 'rgba(80,160,255,0.9)';
     ctx.beginPath();
     ctx.arc(this.character.x, this.character.y, 5, 0, Math.PI * 2);
@@ -1255,7 +1255,7 @@ class Game {
     }
 
     this.isLoading = false;
-    console.log('☁️ A Cloud for Maybel gestartet');
+    console.log('☁️ A Cloud for ... gestartet');
   }
 
   _startDebugPuzzle(puzzleId) {

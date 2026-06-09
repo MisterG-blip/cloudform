@@ -1,5 +1,5 @@
 // ============================================================================
-// TAGEBUCH – A Cloud for Maybel
+// TAGEBUCH – A Cloud for ...
 // Overlay mit aufgeschlagenem Buch, 3 Kategorien (Reiter),
 // Liste links / Eintrag rechts wie ein Dateimanager.
 // Einträge werden automatisch befüllt wenn Logs gemacht werden.

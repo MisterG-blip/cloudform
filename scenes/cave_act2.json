@@ -66,13 +66,13 @@
           }
         },
         {
-          "id": "amina_obj",
+          "id": "amira_obj",
           "type": "npc",
           "x": 250,
           "y": 440,
           "walkTo": { "x": 489, "y": 445 },
           "visual": {
-            "src": "assets/npc/amina_sprite.png",
+            "src": "assets/npc/amira_sprite.png",
             "scale": 0.3,
             "frameW": 1024,
             "frameH": 1024,
@@ -132,47 +132,31 @@
             "w": 70,
             "h": 270
           },
-          "label": "Amina"
+          "label": "Amira"
         }
       ]
     }
   ],
   "items": {},
   "npcs": {
-    "amina": {
-      "name": "Amina",
-      "portrait": "assets/npc/amina_portrait.png",
+    "amira": {
+      "name": "Amira",
+      "portrait": "assets/npc/amira_portrait.png",
       "entry": [
-        {
-          "condition": {
-            "itemInInventory": "wolkenharpune"
-          },
-          "node": "hat_schon_getauscht"
-        },
-        {
-          "condition": {
-            "itemInInventory": "kissen"
-          },
-          "node": "hat_kissen"
-        },
         {
           "node": "start"
         }
       ],
-      "giveEntries": {
-        "kissen": "tausch",
-        "*": "falsch_item"
-      },
       "dialog": {
         "start": {
-          "text": "Psst... nicht so laut. Die Kaninchen mögen keine Fremden. Vor allem nicht, wenn sie laut sind!",
+          "text": "Es ist dunkel geowrden. Die Kaninchen mögen keine Dunkelheit. Was ist draußen passiert?",
           "choices": [
             {
-              "text": "Wer bist du?",
-              "next": "vorstellung"
+              "text": "Ich habe ein paar Wolken gefangen. Willst du sehen?",
+              "next": "Wolken"
             },
             {
-              "text": "Warum lebst du hier unten?",
+              "text": "Der Himmel hat sich verdunkelt. Es zeiht wohl langsam ein Unwetter auf.",
               "next": "story"
             },
             {
@@ -180,10 +164,6 @@
               "next": null
             }
           ]
-        },
-        "vorstellung": {
-          "text": "Ich bin Amina. Früher... naja, ich hatte große Pläne! Aber jetzt lebe ich hier bei den Kaninchen. Sie nennen mich Muck-Muck. Ich habe noch nicht herausgefunden, wofür das steht.",
-          "next": "story"
         },
         "story": {
           "text": "Ich wollte eine Wolke fangen. Einfach so, aus dem Himmel reißen! Ganz für mich allein! Ich hatte sogar eine Harpune gebaut.\n\nSie hat nicht funktioniert.\nAlle haben gelacht.\n\nAlso bin ich hier runter. Die Kaninchen stellen keine Fragen.",
@@ -206,8 +186,8 @@
             }
           ]
         },
-        "wolke": {
-          "text": "Du bist schon mal kein Kaninchen. Du stellst Fragen.\n\nUm ehrlich zu sein: Ich dachte, wenn ich eine hätte... wäre endlich mal irgendwas anders.\nAlle schauen immer nach oben, aber die Leute, die unten sind, die sieht immer keiner.\nIch wollte, dass man sich an mich erinnert.",
+        "Wolken": {
+          "text": "Das Crazy! Es hat funktioniert! So weit bin ich nicht gekommen. Dir gehört mein Respekt! Wie lief es?",
           "next": "wolke1"
         },
         "wolke1": {
@@ -226,10 +206,6 @@
           "text": "Wenn ich nur ein Kissen hätte...\nDann wäre das hier unten fast gemütlich.",
           "next": "start"
         },
-        "wunsch1": {
-          "text": "Wenn ich nur ein Kissen hätte...\nDann wäre das hier unten fast gemütlich.",
-          "next": "story"
-        },
         "tausch": {
           "text": "Ein Kissen...\nDas ist perfekt.\n\nHier. Nimm die Wolkenharpune.\nVielleicht klappt es ja bei dir besser als bei mir. \n\nOder du merkst rechtzeitig, dass Wolken nichts festhalten.",
           "trade": {
@@ -237,23 +213,7 @@
             "receive": "wolkenharpune"
           },
           "next": "nach_tausch"
-        },
-        "nach_tausch": {
-          "text": "Jetzt ist es hier unten endlich weich.\n\nUnd du? Versuch nicht zu hoch zu zielen.",
-          "next": null
-        },
-        "hat_kissen": {
-          "text": "Du hast da ein Kissen...\nWillst du tauschen?",
-          "next": null
-        },
-        "hat_schon_getauscht": {
-          "text": "Die Harpune hast du ja schon.\n\nPass auf, dass du nicht auch unten landest wie ich.",
-          "next": "start"
-        },
-        "falsch_item": {
-          "text": "Das hilft mir hier unten nicht wirklich.",
-          "next": null
-        }
+        }        
       }
     }
   }

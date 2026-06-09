@@ -1,5 +1,5 @@
 // ============================================================================
-// NPC SYSTEM – A Cloud for Maybel
+// NPC SYSTEM – A Cloud for ...
 // Verwaltet NPC-Dialoge (linear + verzweigt) und Item-Tausch.
 // NPCs werden pro Szene in der JSON definiert.
 // ============================================================================

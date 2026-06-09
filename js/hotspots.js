@@ -1,5 +1,5 @@
 // ============================================================================
-// HOTSPOT SYSTEM – A Cloud for Maybel
+// HOTSPOT SYSTEM – A Cloud for ...
 // Liest Hotspots aus screen.objects (unified format).
 // Jedes Object ist gleichzeitig Dekoration + Hotspot.
 // ============================================================================

@@ -1,10 +1,10 @@
 {
-  "id": "maybelroom_act2",
-  "ambient": "assets/audio/ambient/maybel.mp3",
+  "id": "room_act2",
+  "ambient": "assets/audio/ambient/room.mp3",
   "screens": [{
       "id": "screen_1",
       "layers": [
-        { "src": "assets/scenes/maybelroom/act2/bg.png", "placeholder": "#d4a8c7" }
+        { "src": "assets/scenes/room/act2/bg.png", "placeholder": "#d4a8c7" }
       ],
       "walkarea": {
         "points": [
@@ -53,7 +53,7 @@
           "h": 30,
           "label": "Schreibtisch",
           "glow": {
-            "frames": [ "assets/scenes/maybelroom/act1/desk.png" ],
+            "frames": [ "assets/scenes/room/act1/desk.png" ],
             "fps": 2                       
           },
           "condition": null,
@@ -75,7 +75,7 @@
           "h": 120,
           "label": "Schublade",
           "glow": {
-            "frames": [ "assets/scenes/maybelroom/act1/schubladen.png" ],
+            "frames": [ "assets/scenes/room/act1/schubladen.png" ],
             "fps": 2                       
           },
           "condition": {
@@ -99,7 +99,7 @@
           "h": 160,
           "label": "Bett",
           "glow": {
-            "frames": [ "assets/scenes/maybelroom/act1/bett.png" ],
+            "frames": [ "assets/scenes/room/act1/bett.png" ],
             "fps": 2                       
           },
           "condition": {"hotspotNotUsed": { "id": "bett", "action": "take" }
@@ -120,7 +120,7 @@
           "h": 100,
           "label": "Rucksack",
           "glow": {
-            "frames": [ "assets/scenes/maybelroom/act1/rucksack.png" ],
+            "frames": [ "assets/scenes/room/act1/rucksack.png" ],
             "fps": 2                       
           },
           "condition": null,
@@ -160,7 +160,7 @@
           "h": 25,
           "label": "Radio",
           "glow": {
-            "frames": [ "assets/scenes/maybelroom/act1/radio.png" ],
+            "frames": [ "assets/scenes/room/act1/radio.png" ],
             "fps": 2                       
           },
           "condition": null,

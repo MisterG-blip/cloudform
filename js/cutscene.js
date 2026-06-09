@@ -1,5 +1,5 @@
 // ============================================================================
-// CUTSCENE SYSTEM – A Cloud for Maybel
+// CUTSCENE SYSTEM – A Cloud for ...
 // Funktioniert wie das Intro: Pan, Zoom, Fade, Text, Klick/Auto-Timer.
 // Cutscenes werden per Code definiert und per game.cutscene.play() gestartet.
 // ============================================================================

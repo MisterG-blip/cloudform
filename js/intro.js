@@ -1,5 +1,5 @@
 // ============================================================================
-// INTRO SYSTEM – A Cloud for Maybel
+// INTRO SYSTEM – A Cloud for ...
 // Zeigt 3–4 Screens mit Kamera-Pan-Effekt, Text und weiterklicken/Auto-Timer.
 // ============================================================================
 

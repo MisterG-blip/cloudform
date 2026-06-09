@@ -66,13 +66,13 @@
           }
         },
         {
-          "id": "amina_obj",
+          "id": "amira_obj",
           "type": "npc",
           "x": 250,
           "y": 440,
           "walkTo": { "x": 489, "y": 445 },
           "visual": {
-            "src": "assets/npc/amina_sprite.png",
+            "src": "assets/npc/amira_sprite.png",
             "scale": 0.3,
             "frameW": 1024,
             "frameH": 1024,
@@ -132,16 +132,16 @@
             "w": 70,
             "h": 270
           },
-          "label": "Amina"
+          "label": "Amira"
         }
       ]
     }
   ],
   "items": {},
   "npcs": {
-    "amina": {
-      "name": "Amina",
-      "portrait": "assets/npc/amina_portrait.png",
+    "amira": {
+      "name": "Amira",
+      "portrait": "assets/npc/amira_portrait.png",
       "entry": [
         {
           "condition": {
@@ -182,7 +182,7 @@
           ]
         },
         "vorstellung": {
-          "text": "Ich bin Amina. Früher... naja, ich hatte große Pläne! Aber jetzt lebe ich hier bei den Kaninchen. Sie nennen mich Muck-Muck. Ich habe noch nicht herausgefunden, wofür das steht.",
+          "text": "Ich bin Amira. Früher... naja, ich hatte große Pläne! Aber jetzt lebe ich hier bei den Kaninchen. Sie nennen mich Muck-Muck. Ich habe noch nicht herausgefunden, wofür das steht.",
           "next": "story"
         },
         "story": {

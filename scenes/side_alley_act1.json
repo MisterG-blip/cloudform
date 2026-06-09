@@ -212,14 +212,14 @@
         },
         "vorstellung": {
           "text": "Ich bin Timothy Schnurz, Doktor der physikalisch-alchemistischen Chemie.",
-          "next": "maybel"
+          "next": "label"
         },
-        "maybel": {
+        "label": {
           "text": "Und mit wem habe ich es zu tun?",
           "choices": [
             {
-              "text": "Ich bin Maybel, einige nannten mich auch mal die mächtige Maybel!",
-              "next": "maybel1"
+              "text": "Ich bin ..., einige nannten mich auch mal die mächtige ...!",
+              "next": "Label1"
             },
             {
               "text": "Das geht Sie nichts an!",
@@ -227,12 +227,12 @@
             }            
           ]
         },
-        "maybel1": {
+        "label1": {
           "text": "Und wonach suchst du?",
           "choices": [
             {
               "text": "Ich will eine Wolke haben! Ich habe mir eine gewünscht und jemand hat mir versprochen, dass ich sie auf diesem Wege bekomme.",
-              "next": "maybel2"
+              "next": "label2"
             },
             {
               "text": "Das geht Sie nichts an!",
@@ -240,7 +240,7 @@
             }            
           ]
         },
-        "maybel2": {
+        "label2": {
           "text": "Eine Wolke also...\nDas endet selten harmlos.\n\nSo einen Wunsch erfüllt man nicht mal eben.\nDa steckt meistens viel Arbeit dahinter.\n\nIch habe hier eine alte Pumpe abgestellt. Vielleicht hilft sie dir mehr als mir.\nAber es fehlen Teile.",
           "next": "start1"
         },        

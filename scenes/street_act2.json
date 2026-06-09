@@ -132,7 +132,7 @@
             "look": "Die Haustür. Sie führt in mein Zimmer.",
             "take": null,
             "use": {
-              "goToScene": "maybelroom_act2"
+              "goToScene": "room_act2"
             }
           }
         },

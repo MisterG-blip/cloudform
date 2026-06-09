@@ -1,5 +1,5 @@
 // ============================================================================
-// DRAG SYSTEM – A Cloud for Maybel
+// DRAG SYSTEM – A Cloud for ...
 // Verwaltet Drag & Drop für Items:
 //   - Inventar-Slot → Inventar-Slot  (kombinieren oder in Item stecken)
 //   - Inventar-Slot → Szene          (platzieren)

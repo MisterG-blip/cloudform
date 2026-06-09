@@ -1,5 +1,5 @@
 // ============================================================================
-// CHARACTER – A Cloud for Maybel
+// CHARACTER – A Cloud for ...
 // Spritesheet-basiert, 8 Richtungen, Idle-Behavior wie NPCs.
 //
 // SPRITESHEET-AUFBAU (frameW=1024, frameH=1024):
@@ -26,8 +26,8 @@ const DIR_ROWS = [
   { state: 'walk_up',    row: 7 },
 ];
 
-const SPRITE_IDLE = 'assets/character/maybel_idle.png';
-const SPRITE_WALK = 'assets/character/maybel_walk.png';
+const SPRITE_IDLE = 'assets/character/m_idle.png';
+const SPRITE_WALK = 'assets/character/m_walk.png';
 
 const STATES = {
   idle:       { sheet: SPRITE_IDLE, row: 0, frames: 1, fps: 1, startFrame: 0 },

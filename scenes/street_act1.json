@@ -150,7 +150,7 @@
             "look": "Die Haustür. Sie führt in mein Zimmer.",
             "take": null,
             "use": {
-              "goToScene": "maybelroom_act1"
+              "goToScene": "room_act1"
             }
           }
         },

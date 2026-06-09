@@ -1,5 +1,5 @@
 // ============================================================================
-// PUZZLE SYSTEM – A Cloud for Maybel
+// PUZZLE SYSTEM – A Cloud for ...
 // Verwaltet Mini-Rätsel die über der Szene erscheinen.
 // Aktuell: combination_lock (4-stelliges Zahlenschloss)
 // Spiel 2: CLOUD SHOOT MINIGAME

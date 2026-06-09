@@ -1,5 +1,5 @@
 // ============================================================================
-// SCENE RENDERER – A Cloud for Maybel
+// SCENE RENDERER – A Cloud for ...
 // Lädt Szenen-JSON, zeichnet Layer + Objects, verwaltet Screen-Wechsel.
 // Objects vereinen Hotspot + Dekoration + Glow in einem Eintrag.
 // ============================================================================

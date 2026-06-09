@@ -1,9 +1,9 @@
 // ============================================================================
-// SAVE SYSTEM – A Cloud for Maybel
+// SAVE SYSTEM – A Cloud for ...
 // Speichert und lädt Spielfortschritt via localStorage.
 // ============================================================================
 
-const SAVE_KEY = 'maybel_save_v1';
+const SAVE_KEY = 'cfm_save_v1';
 
 class SaveSystem {
   // Aktuellen Spielstand speichern

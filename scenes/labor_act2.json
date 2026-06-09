@@ -68,8 +68,8 @@
       }   
     ],
   "npcs": {
-    "amina": {
-      "name": "Amina",
+    "amira": {
+      "name": "Amira",
       "entry": [
        { "condition": { "itemInInventory": "wolkenharpune" }, "node": "hat_schon_getauscht" },
        { "condition": { "itemInInventory": "kissen" }, "node": "hat_kissen" },
@@ -89,7 +89,7 @@
            ]
           },
         "vorstellung": {
-         "text": "Ich bin Amina. Früher... naja, ich hatte größere Pläne.",
+         "text": "Ich bin Amira. Früher... naja, ich hatte größere Pläne.",
          "next": "story"
         },
         "story": {

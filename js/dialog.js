@@ -1,5 +1,5 @@
 // ============================================================================
-// DIALOG SYSTEM – A Cloud for Maybel
+// DIALOG SYSTEM – A Cloud for ...
 // Zeigt Text-Dialoge als Box unten im Canvas.
 // ============================================================================
 

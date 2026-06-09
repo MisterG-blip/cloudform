@@ -1,5 +1,5 @@
 // ============================================================================
-// SZENE: STRASSE – AKT 1 – A Cloud for Maybel
+// SZENE: STRASSE – AKT 1 – A Cloud for ...
 // ============================================================================
 // Gibt Hotspot-Definitionen zurück und zeichnet den Hintergrund.
 // ============================================================================
@@ -24,7 +24,7 @@ const SCENE_STREET = {
     this._drawCloud(ctx, 430, 55,  90, 35);
     this._drawCloud(ctx, 680, 95,  60, 25);
 
-    // Eine besonders schöne Wolke – Maybels Traumwolke 🌟
+    // Eine besonders schöne Wolke – Traumwolke 🌟
     ctx.fillStyle = 'rgba(255,255,255,0.95)';
     this._drawCloud(ctx, 310, 35, 110, 45);
     ctx.font = '13px sans-serif';
@@ -75,12 +75,12 @@ const SCENE_STREET = {
     ctx.fillText('🌳', 680, 368);   // Baum
     ctx.fillText('🚪', 80,  382);   // Haustür (kommt vom Haus links)
 
-    // Maybel (Platzhalter)
+    // M (Platzhalter)
     ctx.font = '38px serif';
     ctx.fillText('🧒', 400, 377);
     ctx.font = '11px sans-serif';
     ctx.fillStyle = '#555';
-    ctx.fillText('Maybel', 400, 395);
+    ctx.fillText('...', 400, 395);
 
     // Kleiner Hinweis-Text oben
     ctx.font      = '13px sans-serif';
