@@ -3,14 +3,29 @@
   "Ereignisse": [
     {
       "title": "Der erste Tag",
-      "text": "Heute habe ich zum ersten Mal eine Wolke gesehen, die sich nicht bewegte. Sie hing einfach da.",
-      "timestamp": "08:42"
+      "text": "Ich habe dieses Buch neu angefangen. Erste Seiten sind immer die schwersten, als müsste man erst wieder lernen, wie Erinnerungen funktionieren. Vielleicht male ich noch etwas dazu, damit es leichter wird weiterzumachen.",
+      "timestamp": "08.06.2015"
     },
     {
-      "title": "Amira",
-      "text": "Amira sagt, Wolken haben keine Namen. Ich glaube ihr nicht.",
-      "timestamp": "14:15"
-    }
+      "title": "Ein Dienstag wie jeder andere.",
+      "text": "Ich erinnere mich an jemanden, der plötzlich still wurde. Es war, als hätte man ihm etwas genommen, das er nicht aussprechen konnte. Er saß auf einer Parkbank und hat es einfach ausgehalten. In seinem Blick war etwas, das mir bekannt vorkommt – dieses Festhalten an etwas, das schon nicht mehr da ist. Ich weiß nicht, ob es wirklich so war, aber so ist es mir geblieben.",
+      "timestamp": "09.06.2015"
+    },
+    {
+      "title": "Tanja",
+      "text": "Tanja hat gesagt, Wolken haben keine Namen. Ich habe damals darüber nachgedacht, lange nachdem sie schon gegangen war. Vielleicht hatte sie recht. Vielleicht wollte ich es nur nicht glauben.",
+      "timestamp": "10.06.2015"
+    },
+    {
+      "title": "Ein ruhiger Nachmittag",
+      "text": "Ich glaube, es war ein warmer Tag. Ich war draußen und habe die Wolken beobachtet, wie sie sich langsam verändert haben. Nichts Besonderes ist passiert. Aber ich erinnere mich daran, dass es sich nicht falsch angefühlt hat.",
+      "timestamp": "11.06.2015"
+    },
+    {
+      "title": "Ich habe sie wieder gesehen",
+      "text": "Da war wieder diese Wolke. Oder ich denke, es war dieselbe. Ich weiß nicht mehr, warum ich mir so sicher war. Vielleicht bewegen sich manche Dinge nur so, dass man sie wiedererkennen will.\n\nDamals dachte ich, man könnte sie festhalten, wenn man lange genug hinsieht. Heute klingt das weiter entfernt, als es eigentlich sein sollte.",
+      "timestamp": "12.06.2015"
+    } 
   ],
   "Items": [],
   "Codes": [
